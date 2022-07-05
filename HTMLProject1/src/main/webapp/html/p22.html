@@ -1,0 +1,196 @@
+<!--
+	브라우저 (HTML => 정보 제공) = 문자
+	1994 => 넷스케이프 (자바 개발자 => 제임스 고슬링, 아서벤) => 자바는 웹용
+		=> 유료 브라우저
+		=> MS (IE) => 무료 브라우저
+	1995 => 정적 파일 => 동적 파일 (Applet) => 자바가 정식으로 언어 ...
+	------------------------------------------------------
+		|
+	사용자 중심 (Web 2.0) => Script (Ajax)
+		| HTML5 => 시멘텍 태그
+		  ----- MS를 제외하고 나머지 브라우저 업체에서만 제작
+		  		오페라, 애플, 구글
+		|
+			시멘텍 태그 : 검색이 쉽게 만들어준다 (태그를 알아보기 쉽게 제작)
+							HTML은 추상적 태그명을 가지고 있음
+							<object> <video> => 27page
+	최적화		(Web 3.0) => Vue, React
+	
+	웹동작
+		웹 서버 (서버) => 파일을 찾아서 전송 (응답)
+		브라우저 (클라이언트) => 요청 (파일)
+							=> 서버와 연결되는 부분 (주소창)
+	
+	30page
+		서버에서 실행되는 프로그램 (서버프로그램)
+			JSP / Spring / Spring-Boot / Oracle / Java => Back
+		클라이언트에서 실행되는 프로그램 (클라이언트 프로그램)
+			HTML / CSS / JavaScript => Front
+		------------------------------------------------------ FullStack
+		HTML : 브라우저에서 실행되는 언어
+			마크업 언어 : 태그 / 속성 (XML, WML, HTML, VML, ...)
+			
+			HTML은 고정적 => 태그가 지정됨, XML은 가변형 (사용자 정의)
+			CSS : 화면 디자인
+			JavaScript : 브라우저에서 동적
+			
+	HTML5 주요기능 (p.31)
+		HTML5 : 웹 페이지 구성
+		CSS3 : 스타일 적용 (화면 디자인)
+		JavaScript ES5 => ES6 => 사용자 반응 처리
+	--------------------------------------------- 웹 표준
+	HTML = HyperText Markup Language
+		HTML4 + 기타
+				---- 멀티미디어 (<video>, <autio>)
+					그래픽 (<canvas>)
+					CSS3
+					JavaScript (쓰레드, DB연동)
+					시멘텍 태그
+					<header>, <nav>, <footer>, <section>
+					<aside>, ... (원래 <div>로 했었음)
+		편집기 : 이클립스, VSCODE, 웹스톰, 아톰, EditPlus
+		
+	p.51 => HTML 시작
+	HTML 용어
+		태그 / 속성 => 지정되어 있음
+			여는 태그 : <태그명>
+			닫는 태그 : </태그명>
+			독립 태그(Empty) : <태그명 />
+				여는 태그, 닫는 태그가 쌍으로 만들어짐
+				화면에 출력 => <> 출력할 데이터 </>
+								< 속성 = "출력할 데이터">
+								=> link, img, form ...
+			문자 관련 태그
+				<h> => 제목 설정 (h1~6)
+				<b> => bold => 강조 <strong> <i> <mark>
+				<font>
+			화면 이동 태그
+				<a>, <form>
+			이미지 태그
+				<img>
+			라인선 태그
+				<hr>
+			입력란
+				<input type = "">
+						type = "text"
+						type = "password"
+						type = "file"
+						type = "button", radio, checkbox, submit, reset, image
+						type = "hidden"
+						---------------------
+						type = "number"
+						type = "date"
+						--------------------- HTML5 에서추가됨
+				<textarea>
+				<select>
+			단락 / 다음 줄 출력
+				<p>, <br>
+			화면 분할
+				<span>, <div>
+				
+	HTML 구조
+	<!DOCTYPE html> : HTML5문서를 알려주는 선언식
+		=> 첫줄에 옴
+	<html>
+		<head>
+			설정 => 자바스크립트, CSS
+			화면 출력 X
+				<script> 자바스크립트 </script>
+				<style> CSS </style>
+				<meta charset = "UTF-8"> : 한글 변환, 화면 자동이동
+				<title> Insert title here</title>
+		</head>
+		<body>
+			브라우저 화면에 출력
+			
+		</body>
+	</html>
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>HTML5 x=태그</title>
+
+<style type="text/css">
+	h1{
+		background-color: green;
+		color: red;	
+		text-align: center;
+	}
+</style>
+<script type="text/javascript">
+	function send(){
+		alert("hello HTML5");
+	}
+</script>
+</head>
+<body>
+	<!--  Heading 제목 (<h1>~<h6>)
+		형식
+			<h1> 출력할 데이터 </h1>
+			=> 제목으로 설정
+				자동 => bold, br 태그들이 자동으로 설정되엉 있음
+			HTML에서 문자열은 한줄 문자열이다
+	-->
+	
+	<h1>HTML5 H1 : 태그는 소문자로만 사용</h1>
+	<h2>HTML5 H1 : 태그는 소문자로만 사용</h2>
+	<h3>HTML5 H1 : 태그는 소문자로만 사용</h3>
+	<!-- h3 태그가 주로 사용 됨 -->
+	<h4>HTML5 H1 : 태그는 소문자로만 사용</h4>
+	<h5>HTML5 H1 : 태그는 소문자로만 사용</h5>
+	<h6>HTML5 H1 : 태그는 소문자로만 사용</h6>
+	Hello HTML
+	<pre>문자열은 한줄 문자열
+	문자열은 한줄 문자열 문자열은 한줄 문자열
+	문자열은 한줄 문자열
+	</pre>
+	<a href = ""> aaa </a>
+	<a href = ""> bbb </a>
+	<a href = ""> ccc </a>
+	<!-- 
+		태그 속성 
+		= block : System.out.println()
+		= inline : System.out.print()
+	-->
+	<!-- 
+		p  : 단락 나누기
+		br : new line
+		hr : 수평선 그리기
+		------------- 여는 태그만 있음
+	-->
+	<hr>
+	구단별로 보면 드림 올스타는 삼성 라이온즈 6명, 에스에스지 랜더스 4명, 케이티(kt) 위즈·롯데가 각각 1명씩을 배출했다.<br>
+	나눔 올스타에선 기아 타이거즈 9명, 엘지 트윈스 2명, 키움 히어로즈 1명이었다.<p>
+	3년 만에 열리는 이번 올스타전에 팬들은 뜨거운 투표 열기를 보였다. 최종 유효표 264만8888표는 역대 최다 투표수로,<br>
+	종전 기록은 2015년 233만7036표다.
+	<hr>
+	<!-- 
+		b : bold
+		i : 이태릭
+		small : 작은 글자
+		sub : 아래 첨자
+		sup : 위첨자
+		strong : 강조체
+	-->
+	종전 기록은 2015년 <b>233만7036표</b>다.<br>
+	<i>이번 <mark>올스타전</mark>에 팬들은 뜨거운 투표 열기를 보였다.</i><br>
+	<!-- <marquee>구단별로 보면 드림 올스타는 삼성 라이온즈 6명, 에스에스지 랜더스 4명, 케이티(kt) 위즈·롯데가 각각 1명씩을 배출했다.</marquee><br> -->
+	3년 만에 열리는 이번 <blockquote>올스타전에 팬들은 뜨거운 투표</blockquote> 열기를 보였다.<br>
+	구단별로 보면 드림 올스타는 삼성 라이온즈 6명, 에스에스지 랜더스 4명, 케이티(kt) 위즈·롯데가 각각 1명씩을 배출했다.<sup style="color: red">new</sup>
+	<br>
+	<!-- 
+		a => link => 원하는 파일로 이동
+		<a href = "이동할 URL주소"> 문자열 </a> => inline속성 (옆으로 붙여짐)
+		&nbsp; => 공백 문자
+		target = "_blank" => 새 창에서 열기
+			default => self로 되어있음
+	-->
+	<a href = "http://www.naver.com" target = "_blank">네이버</a>&nbsp;
+	<a href = "http://www.daum.net">Daum</a>
+	<!-- 
+		태그중에 가장 많이 사용되는 태그
+	-->
+</body>
+</html>
