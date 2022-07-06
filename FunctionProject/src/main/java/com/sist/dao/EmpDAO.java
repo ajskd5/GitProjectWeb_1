@@ -6,10 +6,9 @@ public class EmpDAO {
 	private PreparedStatement ps;
 	// PROCEDURE
 	//CallableStatement cs;
-	private ResultSet rs;
 	private final String URL = "jdbc:oracle:thin:@localhost:1521:XE";
 	// 드라이버
-	public void EepDAO() {
+	public EmpDAO() {
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 		} catch (Exception e) {
@@ -34,7 +33,6 @@ public class EmpDAO {
 				conn.close();
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
 		}
 	}
 	
@@ -48,6 +46,22 @@ public class EmpDAO {
 					+ "FROM emp, dept, salgrade "
 					+ "WHERE emp.deptno = dept.deptno "
 					+ "AND sal BETWEEN losal AND hisal";
+			ps = conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				EmpVO vo = new EmpVO();
+				vo.setEmpno(rs.getInt(1));
+				vo.setEname(rs.getString(2));
+				vo.setJob(rs.getString(3));
+				vo.setHiredate(rs.getDate(4));
+				vo.setSal(rs.getInt(5));
+				vo.setDname(rs.getString(6));
+				vo.setLoc(rs.getString(7));
+				vo.setGrade(rs.getInt(8));
+				
+				list.add(vo);
+			}
+			rs.close();
 		} catch (Exception e) {
 			// TODO: handle exception
 		} finally {
@@ -61,6 +75,24 @@ public class EmpDAO {
 		List<EmpVO> list = new ArrayList<EmpVO>();
 		try {
 			getConnection();
+			String sql = "SELECT empno, ename, job, hiredate, sal, getDname(deptno), getLoc(deptno), getGrade(sal) "
+					+ "FROM emp";
+			ps = conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				EmpVO vo = new EmpVO();
+				vo.setEmpno(rs.getInt(1));
+				vo.setEname(rs.getString(2));
+				vo.setJob(rs.getString(3));
+				vo.setHiredate(rs.getDate(4));
+				vo.setSal(rs.getInt(5));
+				vo.setDname(rs.getString(6));
+				vo.setLoc(rs.getString(7));
+				vo.setGrade(rs.getInt(8));
+				
+				list.add(vo);
+			}
+			rs.close();
 		} catch (Exception e) {
 			// TODO: handle exception
 		} finally {
