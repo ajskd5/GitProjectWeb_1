@@ -1,0 +1,48 @@
+<!--
+	인접 형제 (+)
+	형제 (~)
+	
+		  body
+			|
+		 section
+			|
+	-----------------
+	|		|		|
+	h1		ul		ul		=> ul+h1
+
+
+	 	   body
+			|
+		 section
+			|
+	-----------------
+	|		|		|
+	h1		ul		ul		=> h1~ul
+	
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+h1+ul li{	/* 인접 형제 */
+	color:red;
+}
+h1~ul li{	/* 형제 */
+	color: blue;
+}
+</style>
+</head>
+<body>
+	<section>
+		<h1>결제 방법</h1>
+		<ul>
+			<li>결제 모듈(아엠포트)</li>
+		</ul>
+		<ul>
+			<li>관리자 승인(메일) => JavaMail</li>
+		</ul>
+	</section>
+</body>
+</html>
