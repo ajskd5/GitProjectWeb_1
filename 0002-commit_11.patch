@@ -1,0 +1,24 @@
+From 6712abbee12035edf32b11c8ca329762a490e37c Mon Sep 17 00:00:00 2001
+From: ajskd5 <ajskd5@naver.com>
+Date: Mon, 11 Jul 2022 18:28:40 +0900
+Subject: [PATCH 2/2] commit_11
+
+---
+ GitRevertProject/src/com/sist/main/MainClass.java | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/GitRevertProject/src/com/sist/main/MainClass.java b/GitRevertProject/src/com/sist/main/MainClass.java
+index 942d1f9..eb7b6bd 100644
+--- a/GitRevertProject/src/com/sist/main/MainClass.java
++++ b/GitRevertProject/src/com/sist/main/MainClass.java
+@@ -7,6 +7,7 @@ public class MainClass {
+ 		System.out.println("Hello Revert Commit -1");
+ 		System.out.println("Hello Revert Commit -2");
+ 		System.out.println("Hello Revert Commit -3");
++		System.out.println("Hello Revert Commit -4");
+ 	}
+ 
+ }
+-- 
+2.37.0.windows.1
+
