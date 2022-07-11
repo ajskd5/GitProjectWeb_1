@@ -39,7 +39,7 @@ public class FoodMain {
 			Elements title = doc.select("div.top_list_slide span.title");
 			Elements subject = doc.select("div.top_list_slide p.desc");
 			Elements poster = doc.select("div.top_list_slide img.center-croping");
-			// 속성값 가져올 때 => attr()
+			// 속성값 가져올 때 => attr() => javascript => data()
 			Elements link = doc.select("div.top_list_slide a"); // a태그 주소값 가져오는거 참고하기
 			
 			for(int i=0; i<title.size(); i++) {
