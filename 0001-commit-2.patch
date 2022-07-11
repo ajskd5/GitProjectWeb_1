@@ -1,0 +1,24 @@
+From 06af5ad93c87d19ddc9fc800ad665dc40c36dfe1 Mon Sep 17 00:00:00 2001
+From: ajskd5 <ajskd5@naver.com>
+Date: Mon, 11 Jul 2022 18:18:39 +0900
+Subject: [PATCH] commit-2
+
+---
+ GitRevertProject/src/com/sist/main/MainClass.java | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/GitRevertProject/src/com/sist/main/MainClass.java b/GitRevertProject/src/com/sist/main/MainClass.java
+index 9e742cb..942d1f9 100644
+--- a/GitRevertProject/src/com/sist/main/MainClass.java
++++ b/GitRevertProject/src/com/sist/main/MainClass.java
+@@ -6,6 +6,7 @@ public class MainClass {
+ 		// TODO Auto-generated method stub
+ 		System.out.println("Hello Revert Commit -1");
+ 		System.out.println("Hello Revert Commit -2");
++		System.out.println("Hello Revert Commit -3");
+ 	}
+ 
+ }
+-- 
+2.37.0.windows.1
+
