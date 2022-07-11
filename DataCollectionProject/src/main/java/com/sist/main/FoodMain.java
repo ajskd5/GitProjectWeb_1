@@ -1,7 +1,10 @@
 package com.sist.main;
 
+import java.util.List;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import com.sist.dao.FoodCategoryVO;
@@ -58,9 +61,50 @@ public class FoodMain {
 			// TODO: handle exception
 		}
 	}
+	
+	//맛집 데이터 수집
+	/*
+	 *    <ul class="list-restaurants type-single-big top_list_restaurant_list">
+              <li class="toplist_list">
+                <div class="with-review">
+                  <figure class="restaurant-item">
+                    <a href="/restaurants/NKeKBl9J2p"
+                      onclick="trackEvent('CLICK_RESTAURANT', {&quot;position&quot;:0,&quot;restaurant_key&quot;:&quot;NKeKBl9J2p&quot;})">
+	 */
+	public void foodData() {
+		try {
+			FoodDAO dao = new FoodDAO();
+			List<FoodCategoryVO> list = dao.foodCategoryInfoData();
+			for(FoodCategoryVO vo : list) {
+				Document doc = Jsoup.connect("https://www.mangoplate.com"+vo.getLink()).get();
+				System.out.println("==========" + vo.getTitle() + "==========");
+				Elements link = doc.select("ul.list-restaurants figure.restaurant-item span.title a");
+				for(int i=0; i<link.size(); i++) {
+					System.out.println(link.get(i).attr("href"));
+					Document doc2 = Jsoup.connect("https://www.mangoplate.com" + link.get(i).attr("href")).get();
+					/*
+					 * <section class="restaurant-detail">
+			            <header>
+			              <div class="restaurant_title_wrap">
+			                <span class="title">
+			                  <h1 class="restaurant_name">더라이브러리</h1>
+			                    <strong class="rate-point ">
+			                      <span>4.3</span>
+					 */
+					// 태그 한개만 출력해서 (여러개하면 Elements)
+					Element title = doc2.selectFirst("span.title h1.restaurant_name");
+					System.out.println(title.text());
+				}
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+	
 	public static void main(String[] args) {
 		FoodMain m = new FoodMain();
-		m.categoryData();
+//		m.categoryData();
+		m.foodData();
 
 	}
 

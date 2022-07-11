@@ -75,4 +75,30 @@ public class FoodDAO {
 		}
 	}
 	
+	public List<FoodCategoryVO> foodCategoryInfoData(){
+		List<FoodCategoryVO> list = new ArrayList<FoodCategoryVO>();
+		try {
+			getConnection();
+			String sql = "SELECT cno, link, title "
+					+ "FROM food_category "
+					+ "ORDER BY cno ASC";
+			ps = conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				FoodCategoryVO vo = new FoodCategoryVO();
+				vo.setCno(rs.getInt(1));
+				vo.setLink(rs.getString(2));
+				vo.setTitle(rs.getNString(3));
+				list.add(vo);
+			}
+			rs.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			disConnection();
+		}
+		
+		return list;
+	}
+	
 }
