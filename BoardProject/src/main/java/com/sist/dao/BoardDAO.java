@@ -54,7 +54,7 @@ public class BoardDAO {
 					+ "FROM (SELECT /*+ INDEX_DESC(freeboard fb_no_pk)*/ no, subject, name, regdate, hit "
 					+ "FROM freeboard)) "
 					+ "WHERE num BETWEEN ? AND ?";
-			ps= conn.prepareStatement(sql);
+			ps = conn.prepareStatement(sql);
 			int rowSize=10;
 			int start = (page*rowSize) - (rowSize-1);
 			int end = page*rowSize;
@@ -62,19 +62,48 @@ public class BoardDAO {
 			ps.setInt(2, end);
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
+				BoardVO vo = new BoardVO();
+				vo.setNo(rs.getInt(1));
+				vo.setSubject(rs.getString(2));
+				vo.setName(rs.getString(3));
+				vo.setRegdate(rs.getDate(4));
+				vo.setHit(rs.getInt(5));
 				
+				list.add(vo);
 			}
 			rs.close();
 		} catch (Exception e) {
-			System.out.println("boardListData : 에러");
+			System.out.println("boardListData 에러");
 			e.printStackTrace();
 		} finally {
 			disConnection();
 		}
-		
 		return list;
 	}
 	
 	// 1-2 총 페이지 (CEIL)
+	public int boardTotal() {
+		int total = 0;
+		try {
+			getConnection();
+			String sql = "SELECT CEIL(COUNT(*)/10.0)  FROM freeboard";
+			ps = conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			rs.next();
+			total = rs.getInt(1);
+			rs.close();
+		} catch (Exception e) {
+			System.out.println("boardTotal 에러");
+			e.printStackTrace();
+		} finally {
+			disConnection();
+		}
+		return total;
+	}
+	
+	// 상세보기
+	// 수정, 삭제
+	// 새글
+	// 찾기
 	
 }
