@@ -1,0 +1,43 @@
+<!--
+	속성 선택자
+	----------- CSS / JavaScript => 태그를 제어하는 프로그램
+	id, class, name (Java)
+	---------  -----
+	CSS/JavaScript
+	
+	ML(markup language) => 태그 + 속성
+							|		|
+						 클래스	 멤버변수
+	태그명(아이디명, 클래스명)[속성명=값]	=> JQuery, VueJS, ReactJS
+	=> JQuery
+	$('input[id=aaa]').click(function(){
+	
+	})
+	$.ajax({
+		
+	})
+	
+	태그명[속성=''] => (=)
+	태그명[속성$=''] => (endsWith)
+	태그명[속성^=''] => (startsWith)
+	태그명[속성*=''] => (contains)
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+img[src$='jpg']{
+	border:5px solid red;
+}
+</style>
+</head>
+<body>
+	<img src="a.jpg" ><br>
+	<img src="b.png" ><br>
+	<img src="c.gif" ><br>
+	<img src="d.jpg" ><br>
+	<img src="e.png" ><br>
+</body>
+</html>
