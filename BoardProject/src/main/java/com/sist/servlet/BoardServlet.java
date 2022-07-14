@@ -61,7 +61,7 @@ public class BoardServlet extends HttpServlet {
 		for(BoardVO vo : list) {
 			out.println("<tr class=dataTr>");
 			out.println("<td width=10%>" + vo.getNo() + "</td>");
-			out.println("<td width=45%><a href=BoardDetail?no"+vo.getNo()+">" + vo.getSubject() + "</a></td>");
+			out.println("<td width=45%><a href=BoardDetail?no="+vo.getNo()+">" + vo.getSubject() + "</a></td>");
 			out.println("<td width=15%>" + vo.getName() + "</td>");
 			out.println("<td width=20%>" + vo.getRegdate().toString() + "</td>");
 			out.println("<td width=10%>" + vo.getHit() + "</td>");
