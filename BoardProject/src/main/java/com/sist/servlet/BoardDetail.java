@@ -23,7 +23,7 @@ public class BoardDetail extends HttpServlet {
 		String no=request.getParameter("no");
 		// <input type=text name=name> => 입력된 값
 		// 모든 데이터는 문자열로 읽는다
-		
+
 		BoardDAO dao = new BoardDAO();
 		BoardVO vo = dao.boardDetail(Integer.parseInt(no), 1);
 		
