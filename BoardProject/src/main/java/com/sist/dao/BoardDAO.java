@@ -86,7 +86,7 @@ public class BoardDAO {
 		int total = 0;
 		try {
 			getConnection();
-			String sql = "SELECT CEIL(COUNT(*)/10.0)  FROM freeboard";
+			String sql = "SELECT CEIL(COUNT(*)/10.0) FROM freeboard";
 			ps = conn.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 			rs.next();
@@ -102,8 +102,68 @@ public class BoardDAO {
 	}
 	
 	// 상세보기
+	public BoardVO boardDetail(int no, int type){
+		BoardVO vo = new BoardVO();
+		try {
+			getConnection();
+			if(type==1) { // DETAIL
+				String sql = "UPDATE freeboard SET "
+						+ "hit=hit+1 "
+						+ "WHERE no=?";
+				ps = conn.prepareStatement(sql);
+				ps.setInt(1, no);
+				ps.executeUpdate(); // 조회수 증가
+			}
+			
+			// 실제 데이터 가져오기
+			String sql = "SELECT no, name, subject, content, regdate, hit "
+					+ "FROM freeboard "
+					+ "WHERE no=?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, no);
+			ResultSet rs = ps.executeQuery();
+			rs.next();
+			vo.setNo(rs.getInt(1));
+			vo.setName(rs.getString(2));
+			vo.setSubject(rs.getString(3));
+			vo.setContent(rs.getString(4));
+			vo.setRegdate(rs.getDate(5));
+			vo.setHit(rs.getInt(6));
+			rs.close();
+
+			
+		} catch (Exception e) {
+			System.out.println("boardDetail 에러");
+			e.printStackTrace();
+		} finally {
+			disConnection();
+		}
+		return vo;
+	}
+	
 	// 수정, 삭제
-	// 새글
+	// 새글 => 회원가입, 장바구니, 예매, 글쓰기 INSERT
+	public void boardInsert(BoardVO vo) {
+		try {
+			getConnection();
+			String sql="INSERT INTO freeboard(no, name, subject, content, pwd) "
+				      +"VALUES((SELECT NVL(MAX(no)+1,1) FROM freeboard),?,?,?,?)";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, vo.getName());
+			ps.setString(2, vo.getSubject());
+			ps.setString(3, vo.getContent());
+			ps.setString(4, vo.getPwd());
+			
+			ps.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("boardInsert() 에러");
+			e.printStackTrace();
+		} finally {
+			disConnection();
+		}
+	}
+	
 	// 찾기
 	
 }
