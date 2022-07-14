@@ -22,7 +22,6 @@
 	border-bottom-style: dotted;
 	border-bottom-width: 1px;
 	border-bottom-color: #333;
-	text-align: center;
 }
 .table_content .dataTr:hover{
 	background-color: FC6;
