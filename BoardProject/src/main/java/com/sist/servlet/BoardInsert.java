@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.sist.vo.BoardVO;
+
 @WebServlet("/BoardInsert")
 public class BoardInsert extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -15,8 +17,9 @@ public class BoardInsert extends HttpServlet {
 		// 1. 변환 (전송방법) => HTML, XML, JSON
 		response.setContentType("text/HTML; charset=UTF-8");
 		// 2. 브라우저에서 읽어갈 위치의 메모리 설정
-		PrintWriter out = response.getWriter();out.println("<html>");
+		PrintWriter out = response.getWriter();
 		
+		out.println("<html>");
 		out.println("<head>");
 		out.println("<style type=text/css>");
 		out.println("div{ width:100%; }");
@@ -25,11 +28,12 @@ public class BoardInsert extends HttpServlet {
 		out.println("</style>");
 		out.println("<link rel=stylesheet href=table.css>");
 		out.println("</head>");
-		out.println("<body>");	
 		
+		out.println("<body>");
 		out.println("<div>");
-		out.println("<h1>자유게시판</h1>");
+		out.println("<h1>글쓰기</h1>");
 		
+		out.println("<form method=post action=BoardInsert>");
 		out.println("<table width=700 class=table_content>");
 		out.println("<tr>");
 		out.println("<th align=right width=15%>이름</th>");
@@ -54,10 +58,40 @@ public class BoardInsert extends HttpServlet {
 		out.println("</td>");
 		out.println("</tr>");
 		out.println("</table>");
+		out.println("</form>");
 		
 		out.println("</div>");
 		out.println("</body>");
 		out.println("</html>");
 	}
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		try {
+			// 값 받을때 한글이 깨짐
+			// 한글 변환 디코딩
+			req.setCharacterEncoding("UTF-8"); // POST방식
+			// 디코딩 => 인코딩(byte[])
+			
+			
+		} catch (Exception e) {
+			String name = req.getParameter("name");
+			String subject = req.getParameter("subject");
+			String content = req.getParameter("content");
+			String pwd = req.getParameter("pwd");
+			
+			BoardVO vo = new BoardVO();
+			vo.setName(name);
+			vo.setSubject(subject);
+			vo.setContent(content);
+			vo.setPwd(pwd);
+			
+			// DAO 연결
+			
+			// 화면 이동 => BoardServlet
+			resp.sendRedirect("BoardServlet");
+		}
+	}
+	
 
 }
