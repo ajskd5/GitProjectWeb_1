@@ -109,6 +109,7 @@ public class BoardUpdate extends HttpServlet {
 		
 		// Oracle전송
 		BoardDAO dao = new BoardDAO();
+		dao.boardUpdate(vo);
 		
 		// 화면이동 => BoardDetail
 		response.sendRedirect("BoardDetail?no="+no);
