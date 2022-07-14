@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.sist.dao.BoardDAO;
 import com.sist.vo.BoardVO;
 
 @WebServlet("/BoardInsert")
@@ -75,22 +76,25 @@ public class BoardInsert extends HttpServlet {
 			
 			
 		} catch (Exception e) {
-			String name = req.getParameter("name");
-			String subject = req.getParameter("subject");
-			String content = req.getParameter("content");
-			String pwd = req.getParameter("pwd");
 			
-			BoardVO vo = new BoardVO();
-			vo.setName(name);
-			vo.setSubject(subject);
-			vo.setContent(content);
-			vo.setPwd(pwd);
-			
-			// DAO 연결
-			
-			// 화면 이동 => BoardServlet
-			resp.sendRedirect("BoardServlet");
 		}
+		String name = req.getParameter("name"); // 유효성 검사(JQuery)
+		String subject = req.getParameter("subject");
+		String content = req.getParameter("content");
+		String pwd = req.getParameter("pwd");
+		
+		BoardVO vo = new BoardVO();
+		vo.setName(name);
+		vo.setSubject(subject);
+		vo.setContent(content);
+		vo.setPwd(pwd);
+		
+		// DAO 연결
+		BoardDAO dao = new BoardDAO();
+		dao.boardInsert(vo);
+		
+		// 화면 이동 => BoardServlet
+		resp.sendRedirect("BoardServlet");
 	}
 	
 
