@@ -47,7 +47,7 @@ public class BoardServlet extends HttpServlet {
 		
 		out.println("<table width=700 class=table_content>");
 		out.println("<tr>");
-		out.println("<td><a href=BoardInsert>새글</a></td>");
+		out.println("<td><a href=BoardInsert>글쓰기</a></td>");
 		out.println("</tr>");
 		out.println("</table>");
 		out.println("<table width=700 class=table_content>");
