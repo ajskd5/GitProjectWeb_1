@@ -40,11 +40,10 @@ public class BoardServlet extends HttpServlet {
 		out.println("</style>");
 		out.println("<link rel=stylesheet href=table.css>");
 		out.println("</head>");
-		out.println("<body>");	
 		
+		out.println("<body>");
 		out.println("<div>");
 		out.println("<h1>자유게시판</h1>");
-
 		
 		out.println("<table width=700 class=table_content>");
 		out.println("<tr>");
@@ -52,6 +51,7 @@ public class BoardServlet extends HttpServlet {
 		out.println("</tr>");
 		out.println("</table>");
 		out.println("<table width=700 class=table_content>");
+		out.println("<tr>");
 		out.println("<th width=10%>번호</th>");
 		out.println("<th width=45%>제목</th>");
 		out.println("<th width=15%>이름</th>");
