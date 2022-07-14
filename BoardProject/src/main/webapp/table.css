@@ -27,3 +27,15 @@
 	background-color: FC6;
 	cursor: pointer;
 }
+a{
+	text-decoration: none;
+	color: black;
+}
+a:hover {
+	text-decoration: underline;
+	color: cyan;
+}
+input[type=button], input[type=submit]{
+	border-radius: 5px;
+	background-color: pink;
+}
