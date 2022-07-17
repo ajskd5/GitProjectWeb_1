@@ -27,12 +27,12 @@ public class Book extends HttpServlet {
 		// 2. 브라우저에서 읽어갈 위치의 메모리 설정
 		PrintWriter out = response.getWriter();
 		BookDAO dao = new BookDAO();
-		List<BookVO> list = dao.bookLinkData();
+		List<BookLinkVO> list = dao.bookLinkData();
 		out.println("<html>");
 		out.println("<body>");
 		
 		try {
-			for(BookVO vo : list) {
+			for(BookLinkVO vo : list) {
 				
 			}
 			Document doc = Jsoup.connect("http://www.yes24.com/Product/Goods/105505636").get();
@@ -42,6 +42,7 @@ public class Book extends HttpServlet {
 			Element price = doc.selectFirst("div.gd_infoTb em.yes_m");
 			Elements content = doc.select("div.infoWrap_txtInner");
 			Elements index = doc.select("div#infoset_toc textarea.txtContentText"); // html로?
+			Element info = doc.selectFirst("tbody.b_size"); 
 			
 			String content2 = content.html().toString();
 			content2 = content2.substring(content2.indexOf("class=\"txtContentText\">"), content2.indexOf("</textarea>"));
@@ -59,7 +60,8 @@ public class Book extends HttpServlet {
 			out.println(author.text() + "<br><hr>");
 			out.println(price.text() + "<br><hr>");
 			out.println(content2 + "<br><hr>");
-			out.println(index2);
+			out.println(index2 + "<br>");
+			out.println("<table>" + info.html() + "</table>");
 			
 		} catch (Exception e) {
 			// TODO: handle exception
