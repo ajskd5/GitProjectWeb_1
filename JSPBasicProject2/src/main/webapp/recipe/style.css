@@ -1,0 +1,66 @@
+img {
+  width: 300px;
+  height: 200px;
+}
+
+header {
+  height: 50px;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+header #rating-filter {
+  color: white;
+  padding: 5px;
+  background: orangered;
+  border: none;
+  cursor: pointer;
+}
+
+section {
+  margin: auto;
+  margin-top: 20px;
+  max-width: 760px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+figure {
+  background-color: white;
+  width: 14em;
+  margin: 0.5em;
+  box-shadow: 0 5px 18px 0 gray;
+  overflow: hidden;
+  position: relative;
+}
+figure img {
+  height: 21em;
+}
+figure figcaption {
+  line-height: 2;
+  padding: 0 0.8em;
+}
+figure figcaption p {
+  text-transform: capitalize;
+  font-size: 0.8em;
+  margin-bottom: 0;
+  color: orangered;
+}
+figure figcaption .rating {
+  display: flex;
+  align-items: center;
+}
+figure figcaption .rating .fa-heart {
+  color: #fa5050;
+  margin: 0.5em 0.5em 0.5em 0;
+}
+figure figcaption .rating h4 {
+  margin: 0;
+}
+
+@media (max-width: 737px) {
+  section {
+    justify-content: center;
+  }
+}
