@@ -103,8 +103,8 @@ public class FoodMain {
 	
 	public static void main(String[] args) {
 		FoodMain m = new FoodMain();
-//		m.categoryData();
-		m.foodData();
+		m.categoryData();
+//		m.foodData();
 
 	}
 
