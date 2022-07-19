@@ -93,7 +93,46 @@ public class DataBoardDAO {
 			dbconn.disConnection(ps);
 		}
 	}
-	// 상세보기 => 조회수 증가 , 다운로드(response) 
+	
+	// 상세보기 => 조회수 증가 , 파일 다운로드(response) 
+	public DataBoardVO databoardDetail(int no) {
+		DataBoardVO vo = new DataBoardVO();
+		try {
+			conn = dbconn.getConnection();
+			// 조회수 증가
+			String sql = "UPDATE databoard SET "
+					+ "hit = hit+1 "
+					+ "WHERE no=?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, no);
+			ps.executeUpdate();
+			
+			// 값 가져오기, 파일 다운로드
+			sql = "SELECT no, name, subject, content, regdate, hit, filename, filesize "
+					+ "FROM databoard "
+					+ "WHERE no=?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, no);
+			ResultSet rs = ps.executeQuery();
+			rs.next();
+			vo.setNo(rs.getInt(1));
+			vo.setName(rs.getString(2));
+			vo.setSubject(rs.getString(3));
+			vo.setContent(rs.getString(4));
+			vo.setRegdate(rs.getDate(5));
+			vo.setHit(rs.getInt(6));
+			// 다운로드
+			vo.setFilename(rs.getString(7));
+			vo.setFilesize(rs.getInt(8));
+			
+			rs.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			dbconn.disConnection(ps);
+		}
+		return vo;
+	}
 	
 	// 수정
 	

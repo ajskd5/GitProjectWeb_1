@@ -79,7 +79,7 @@ a:hover{
 			%>
 				<tr>
 					<td width="10%" align="center"><%=vo.getNo() %></td>
-					<td width="45%"><%=vo.getSubject() %>
+					<td width="45%"><a href="detail.jsp?no=<%=vo.getNo()%>"><%=vo.getSubject() %></a>
 					&nbsp;
 					<%
 						String today = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
