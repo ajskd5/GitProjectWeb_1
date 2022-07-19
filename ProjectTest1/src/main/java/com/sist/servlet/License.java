@@ -28,7 +28,7 @@ public class License extends HttpServlet {
 		// 3. 데이터 읽기
 		LicenseDAO dao = new LicenseDAO();
 		List<LicenseLinkVO> list = dao.licenseListData();
-		List<LicenseVO> llist = dao.licenseData();
+		List<LicenseVO> llist = dao.licenseData(1);
 		out.println("<html>");
 		out.println("<body>");
 		
@@ -66,17 +66,18 @@ public class License extends HttpServlet {
 //				}
 //
 //				out.println(content+"<br>");
-				
-				
 
 			}
 			for(LicenseVO vo : llist) {
-				out.println(vo.getL_no());
+				out.println(vo.getL_no() + "번");
 				out.println(vo.getL_cno());
 				out.println(vo.getL_name());
 				out.println(vo.getL_info());
 				out.println(vo.getL_info2());
-				out.println(vo.getL_img());
+				out.println("<img href=\"" + vo.getL_img() +"\">");
+				out.println(vo.getL_content());
+				out.println(vo.getL_cno());
+				out.println(vo.getL_pno());
 				
 			}
 		} catch (Exception e) {

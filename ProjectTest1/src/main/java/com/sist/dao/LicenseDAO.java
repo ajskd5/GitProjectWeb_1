@@ -211,7 +211,7 @@ public class LicenseDAO {
 			ps.setString(5, vo.getL_img());
 			ps.setString(6, vo.getL_content());
 			ps.setInt(7, vo.getL_cno());
-			ps.setInt(8, vo.getL_poster());
+			ps.setInt(8, vo.getL_pno());
 			ps.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -220,11 +220,29 @@ public class LicenseDAO {
 		}
 	}
 	
-	public List<LicenseVO> licenseData(){
+	public List<LicenseVO> licenseData(int l_no){
 		List<LicenseVO> list = new ArrayList<LicenseVO>();
 		try {
 			getConnection();
-			String sql = "SELECT ";
+			String sql = "SELECT l_no, l_name, l_info, l_info2, l_schedule, l_img, l_content, l_cno, l_pno "
+					+ "FROM license_1 "
+					+ "WHERE l_no=?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, l_no);
+			ResultSet rs = ps.executeQuery();
+			rs.next();
+			LicenseVO vo = new LicenseVO();
+			vo.setL_no(rs.getInt(1));
+			vo.setL_name(rs.getString(2));
+			vo.setL_info(rs.getString(3));
+			vo.setL_info2(rs.getString(4));
+			vo.setL_schedule(rs.getString(5));
+			vo.setL_img(rs.getString(6));
+			vo.setL_content(rs.getString(7));
+			vo.setL_cno(rs.getInt(8));
+			vo.setL_pno(rs.getInt(9));
+			list.add(vo);
+			rs.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
