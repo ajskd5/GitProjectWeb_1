@@ -224,8 +224,9 @@ public class LicenseDAO {
 		List<LicenseVO> list = new ArrayList<LicenseVO>();
 		try {
 			getConnection();
-			String sql = "SELECT l_no, l_name, l_info, l_info2, l_schedule, l_img, l_content, l_cno, l_pno "
-					+ "FROM license_1 "
+			String sql = "Sl_no, l_name, l_info, l_info2, l_schedule, l_img, l_content, l_cno, "
+					+ "(SELECT lp_poster FROM l_poster_1 WHERE l_poster_1.lp_no = license_1.l_pno) "
+					+ "FROM license_1"
 					+ "WHERE l_no=?";
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, l_no);
@@ -240,7 +241,7 @@ public class LicenseDAO {
 			vo.setL_img(rs.getString(6));
 			vo.setL_content(rs.getString(7));
 			vo.setL_cno(rs.getInt(8));
-			vo.setL_pno(rs.getInt(9));
+			vo.setL_poster(rs.getString(9));
 			list.add(vo);
 			rs.close();
 		} catch (Exception e) {

@@ -1,8 +1,8 @@
 package com.sist.vo;
 
 public class LicenseVO {
-	private int l_no, l_cno, l_pno;;
-	private String  l_name, l_info, l_info2, l_schedule, l_img, l_content;
+	private int l_no, l_cno, l_pno;
+	private String  l_name, l_info, l_info2, l_schedule, l_img, l_content, l_poster;
 	public int getL_no() {
 		return l_no;
 	}
@@ -57,6 +57,14 @@ public class LicenseVO {
 	public void setL_pno(int l_pno) {
 		this.l_pno = l_pno;
 	}
+	public String getL_poster() {
+		return l_poster;
+	}
+	public void setL_poster(String l_poster) {
+		this.l_poster = l_poster;
+	}
+
+	
 
 	
 }

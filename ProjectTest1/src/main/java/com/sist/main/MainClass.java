@@ -117,7 +117,7 @@ public class MainClass {
 				List<PosterVO> list3 = dao.PosterData(i);
 				for(PosterVO vo3 : list3) {
 					i++;
-					vo.setL_poster(vo3.getLp_no());
+					vo.setL_pno(vo3.getLp_no());
 					System.out.println(vo3.getLp_no());
 					break;
 				}

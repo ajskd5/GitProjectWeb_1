@@ -69,15 +69,15 @@ public class License extends HttpServlet {
 
 			}
 			for(LicenseVO vo : llist) {
-				out.println(vo.getL_no() + "번");
-				out.println(vo.getL_cno());
-				out.println(vo.getL_name());
-				out.println(vo.getL_info());
-				out.println(vo.getL_info2());
-				out.println("<img href=\"" + vo.getL_img() +"\">");
-				out.println(vo.getL_content());
-				out.println(vo.getL_cno());
-				out.println(vo.getL_pno());
+				out.println(vo.getL_no() + "번" + "<br>");
+				out.println(vo.getL_cno() + "<br>");
+				out.println(vo.getL_name() + "<br>");
+				out.println(vo.getL_info() + "<br>");
+				out.println(vo.getL_info2() + "<br>");
+				out.println("<img href=\"" + vo.getL_img() +"\">" + "<br>");
+				out.println(vo.getL_content() + "<br>");
+				out.println(vo.getL_cno() + "<br>");
+				out.println("<img href=\"" + vo.getL_poster() + "\">" + "<br>");
 				
 			}
 		} catch (Exception e) {
