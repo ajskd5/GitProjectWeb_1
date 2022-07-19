@@ -61,7 +61,7 @@ a:hover{
 		<table class="table_content" >
 			<tr>
 				<td>
-					<a href="insert.jsp">새글</a>
+					<a href="insert.jsp">글쓰기</a>
 				</td>
 			</tr>
 		</table>
