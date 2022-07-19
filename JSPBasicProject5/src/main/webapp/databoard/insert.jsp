@@ -31,6 +31,7 @@ a:hover{
 <body>
 	<div class="container">
 		<h1>글쓰기</h1>
+		<form method="post" action="insert_ok.jsp" enctype="multipart/form-data">
 		<table class="table_content" >
 			<tr>
 				<th width="15%">이름</th>
@@ -69,6 +70,7 @@ a:hover{
 				</td>
 			</tr>
 		</table>
+		</form>
 	</div>
 </body>
 </html>

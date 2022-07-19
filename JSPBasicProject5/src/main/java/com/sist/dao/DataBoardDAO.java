@@ -73,7 +73,26 @@ public class DataBoardDAO {
 	}
 	
 	// 데이터 첨부 (업로드)
-	
+	public void databoardInsert(DataBoardVO vo) {
+		try {
+			conn = dbconn.getConnection();
+			String sql = "INSERT INTO databoard(no, name, subject, content, pwd, filename, filesize) "
+					+ "VALUES(db_no_seq.nextval, ?, ?, ?, ?, ?, ?)";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, vo.getName());
+			ps.setString(2, vo.getSubject());
+			ps.setString(3, vo.getContent());
+			ps.setString(4, vo.getPwd());
+			ps.setString(5, vo.getFilename());
+			ps.setInt(6, vo.getFilesize());
+			
+			ps.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			dbconn.disConnection(ps);
+		}
+	}
 	// 상세보기 => 조회수 증가 , 다운로드(response) 
 	
 	// 수정
