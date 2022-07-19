@@ -25,7 +25,7 @@ public class DataBoardDAO {
 			String sql = "SELECT no, subject, name, regdate, hit, num "
 					+ "FROM (SELECT no, subject, name, regdate, hit, rownum as num "
 					+ "FROM (SELECT /*+ INDEX_DESC(databoard db_no_pk) */ no, subject, name, regdate, hit "
-					+ "FROM databard)) "
+					+ "FROM databoard)) "
 					+ "WHERE num BETWEEN ? AND ?";
 			ps = conn.prepareStatement(sql);
 			int rowSize = 10; // 한페이지에 10개 출력
