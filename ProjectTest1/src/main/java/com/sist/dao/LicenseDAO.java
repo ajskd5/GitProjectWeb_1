@@ -67,7 +67,7 @@ public class LicenseDAO {
 		try {
 			getConnection();
 			String sql = "SELECT ll_no, ll_name, ll_link, l_cno "
-					+ "FROM l_list_1 "
+					+ "FROM l_link_1 "
 					+ "ORDER BY ll_no ASC";
 			ps = conn.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
@@ -80,7 +80,7 @@ public class LicenseDAO {
 				list.add(vo);
 			}
 			rs.close();
-		} catch (Exception e) {
+		} catch (Exception e) { 
 			e.printStackTrace();
 		} finally {
 			disConnection();
@@ -93,8 +93,8 @@ public class LicenseDAO {
 	public void linkInsert(LicenseLinkVO vo) {
 		try {
 			getConnection();
-			String sql = "INSERT INTO l_list_1(ll_no, ll_name, ll_link) "
-					+ "VALUES((Select NVL(MAX(ll_no)+1, 1) FROM l_list_1), "
+			String sql = "INSERT INTO l_link_1(ll_no, ll_name, ll_link) "
+					+ "VALUES((Select NVL(MAX(ll_no)+1, 1) FROM l_linㅏ_1), "
 					+ "?, ?)";
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, vo.getLl_name());
@@ -211,7 +211,7 @@ public class LicenseDAO {
 			ps.setString(5, vo.getL_img());
 			ps.setString(6, vo.getL_content());
 			ps.setInt(7, vo.getL_cno());
-			ps.setInt(8, vo.getL_pno());
+			ps.setInt(8, vo.getLp_no());
 			ps.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -224,7 +224,7 @@ public class LicenseDAO {
 		List<LicenseVO> list = new ArrayList<LicenseVO>();
 		try {
 			getConnection();
-			String sql = "Sl_no, l_name, l_info, l_info2, l_schedule, l_img, l_content, l_cno, "
+			String sql = "SELECT l_no, l_name, l_info, l_info2, l_schedule, l_img, l_content, l_cno, "
 					+ "(SELECT lp_poster FROM l_poster_1 WHERE l_poster_1.lp_no = license_1.l_pno) "
 					+ "FROM license_1"
 					+ "WHERE l_no=?";

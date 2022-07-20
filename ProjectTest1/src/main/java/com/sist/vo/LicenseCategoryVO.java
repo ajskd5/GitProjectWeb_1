@@ -15,5 +15,6 @@ public class LicenseCategoryVO {
 	public void setL_cname(String l_cname) {
 		this.l_cname = l_cname;
 	}
+
 	
 }

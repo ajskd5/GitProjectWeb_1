@@ -78,7 +78,6 @@ public class License extends HttpServlet {
 				out.println(vo.getL_content() + "<br>");
 				out.println(vo.getL_cno() + "<br>");
 				out.println("<img href=\"" + vo.getL_poster() + "\">" + "<br>");
-				
 			}
 		} catch (Exception e) {
 			// TODO: handle exception

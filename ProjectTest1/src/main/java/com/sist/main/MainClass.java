@@ -7,13 +7,14 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 public class MainClass {
+	// 각 링크, 이름
 	public void linkData() {
 		try {
 			LicenseDAO dao = new LicenseDAO();
 			Document doc = Jsoup.connect("https://www.studyon.co.kr/index.php?mid=home3").get();
 			Elements name = doc.select("div.xe_content a[target=\"_parent\"]");
 			Elements link = doc.select("div.xe_content a[target=\"_parent\"]");
-			Elements category = doc.select("tr td[colspan=\"4\"] strong");
+//			Elements category = doc.select("tr td[colspan=\"4\"] strong");
 //			for(int i=0; i<category.size(); i++) {
 //				System.out.println(category.get(i).text());
 //				LicenseCategoryVO vo = new LicenseCategoryVO();
@@ -21,13 +22,14 @@ public class MainClass {
 //				dao.licenseCategory(vo);
 //			}
 			for(int i=0; i<name.size(); i++) {
-				System.out.println(name.get(i).text());
+				System.out.println(name.get(i).text().substring(1));
 				System.out.println(link.get(i).attr("href"));
 				System.out.println();
 				LicenseLinkVO vo = new LicenseLinkVO();
 				
-				vo.setLl_name(name.get(i).text());
+				vo.setLl_name(name.get(i).text().substring(1));
 				vo.setLl_link(link.get(i).attr("href"));
+				
 				dao.linkInsert(vo);
 			}
 			
@@ -38,17 +40,18 @@ public class MainClass {
 		
 	}
 	
+	// 카테고리 테이블 (번호, 카테고리)
 	public void CategoryInsert() {
 		try {
 			LicenseDAO dao = new LicenseDAO();
 			Document doc = Jsoup.connect("https://www.studyon.co.kr/index.php?mid=home3").get();
-			Elements name = doc.select("div.xe_content a[target=\"_parent\"]");
-			Elements link = doc.select("div.xe_content a[target=\"_parent\"]");
+//			Elements name = doc.select("div.xe_content a[target=\"_parent\"]");
+//			Elements link = doc.select("div.xe_content a[target=\"_parent\"]");
 			Elements category = doc.select("tr td[colspan=\"4\"] strong");
 			for(int i=0; i<category.size(); i++) {
-				System.out.println(category.get(i).text());
+				System.out.println(category.get(i).text().substring(2));
 				LicenseCategoryVO vo = new LicenseCategoryVO();
-				vo.setL_cname(category.get(i).text());
+				vo.setL_cname(category.get(i).text().substring(2));
 				dao.licenseCategory(vo);
 			}
 		} catch (Exception e) {
@@ -63,71 +66,78 @@ public class MainClass {
 			
 			int i=1;
 			for(LicenseLinkVO vo2 : list2) {
-				LicenseVO vo = new LicenseVO();
-				Document doc = Jsoup.connect("https://www.studyon.co.kr"+vo2.getLl_link()).get();
-				Document doc2 = Jsoup.connect("https://www.studyon.co.kr/index.php?mid=home3").get();
-				Elements info = doc.select("div.bg");
-				Elements schedule = doc.select("div.widcontent strong");
-				String schedule2 = schedule.text().toString();
-				schedule2 = schedule2.substring(1, schedule2.length()-1); // 시험일정 앞뒤 <>자르기
+				try {
+					LicenseVO vo = new LicenseVO();
+					Document doc = Jsoup.connect("https://www.studyon.co.kr"+vo2.getLl_link()).get();
+					Document doc2 = Jsoup.connect("https://www.studyon.co.kr/index.php?mid=home3").get();
+					Elements info = doc.select("div.bg");
+					Elements schedule = doc.select("div.widcontent strong");
+					String schedule2 = schedule.text().toString();
+					schedule2 = schedule2.substring(1, schedule2.length()-1); // 시험일정 앞뒤 <>자르기
 
-				Elements img = doc.select("div.widcontent img");
-				Elements detail = doc.select("div.widcontent");
-				
-				String content = detail.html().toString();
-				String info2 = content;
-				
-				System.out.println(vo2.getLl_name());
-				System.out.println(info.text());
-				info2 = info2.substring(0, info2.indexOf("<strong>"));
-				System.out.println(info2);
-				System.out.println(schedule2);
-				System.out.println("https://www.studyon.co.kr/" + img.attr("src"));
-				System.out.println("상세설명");
-//				if(content.indexOf("<p><br> 1.")==-1) {
-//					content = content.substring(content.indexOf("<p>1."), content.indexOf("<table"));
-//				} else {
-//					content = content.substring(content.indexOf("<p><br> 1."), content.indexOf("<table"));
-//				}
-				System.out.println(vo2.getL_cno());
-//				System.out.println(content);
-				
-				if(content.indexOf("<p><br> 1.")==-1) {
-					if(content.indexOf("<table")==-1) {
-						content = content.substring(content.indexOf("1."), content.indexOf("<div id=\"footer\""));
+					Elements img = doc.select("div.widcontent img");
+					Elements detail = doc.select("div.widcontent");
+					
+					String content = detail.html().toString();
+					String info2 = content;
+					
+					System.out.println(vo2.getLl_name());
+					System.out.println(info.text());
+					info2 = info2.substring(0, info2.indexOf("<strong>"));
+					System.out.println(info2);
+					System.out.println(schedule2);
+					System.out.println("https://www.studyon.co.kr/" + img.attr("src"));
+					System.out.println("상세설명");
+//					if(content.indexOf("<p><br> 1.")==-1) {
+//						content = content.substring(content.indexOf("<p>1."), content.indexOf("<table"));
+//					} else {
+//						content = content.substring(content.indexOf("<p><br> 1."), content.indexOf("<table"));
+//					}
+					System.out.println(vo2.getL_cno());
+//					System.out.println(content);
+					
+					if(content.indexOf("<p><br> 1.")==-1) {
+						if(content.indexOf("<table")==-1) {
+							content = content.substring(content.indexOf("1."), content.indexOf("<div id=\"footer\""));
+						} else {
+							content = content.substring(content.indexOf("1."), content.indexOf("<table"));
+						}
 					} else {
-						content = content.substring(content.indexOf("1."), content.indexOf("<table"));
+						if(content.indexOf("<table")==-1) {
+							content = content.substring(content.indexOf("<p><br> 1."), content.indexOf("<div id=\"footer\""));
+						} else {
+							content = content.substring(content.indexOf("<p><br> 1."), content.indexOf("<table"));
+						}
 					}
-				} else {
-					if(content.indexOf("<table")==-1) {
-						content = content.substring(content.indexOf("<p><br> 1."), content.indexOf("<div id=\"footer\""));
-					} else {
-						content = content.substring(content.indexOf("<p><br> 1."), content.indexOf("<table"));
+
+					String name = vo2.getLl_name();
+					vo.setL_name(name);
+					vo.setL_info(info.text());
+					vo.setL_info2(info2);
+					vo.setL_schedule(schedule2);
+					vo.setL_img("https://www.studyon.co.kr/" + img.attr("src"));
+					vo.setL_content(content);
+					vo.setL_cno(vo2.getL_cno());
+					List<PosterVO> list3 = dao.PosterData(i);
+					for(PosterVO vo3 : list3) {
+						i++;
+						vo.setLp_no(vo3.getLp_no());
+						System.out.println(vo3.getLp_no());
+						break;
 					}
+					if(i>20) {
+						i=1;
+					}
+					dao.licenseInsert(vo);
+				} catch (Exception e) {
+					System.out.println("반복문 안에서 try~catch 에러");
+					e.printStackTrace();
 				}
 
-				String name = vo2.getLl_name().substring(1);
-				vo.setL_name(name);
-				vo.setL_info(info.text());
-				vo.setL_info2(info2);
-				vo.setL_schedule(schedule2);
-				vo.setL_img("https://www.studyon.co.kr/" + img.attr("src"));
-				vo.setL_content(content);
-				vo.setL_cno(vo2.getL_cno());
-				List<PosterVO> list3 = dao.PosterData(i);
-				for(PosterVO vo3 : list3) {
-					i++;
-					vo.setL_pno(vo3.getLp_no());
-					System.out.println(vo3.getLp_no());
-					break;
-				}
-				if(i>20) {
-					i=1;
-				}
-				dao.licenseInsert(vo);
 
 			}
 		} catch (Exception e) {
+			System.out.println("반복문 밖에서 try~catch 에러");
 			e.printStackTrace();
 		}
 	}
@@ -170,7 +180,7 @@ public class MainClass {
 	public static void main(String[] args) {
 		MainClass m = new MainClass();
 //		m.linkData();
-//		m.licenseDetail();
+		m.licenseDetail();
 //		m.CategoryInsert();
 //		m.posterInsert();
 	}
