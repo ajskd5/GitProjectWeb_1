@@ -2,7 +2,12 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
   <display-name>JSPBasicProject7</display-name>
   <!-- application, config -->
-  <context-param>
+  <context-param> <!-- 웹 관련 클래스 : Map(key, vlaue) 
+  		?no=10
+  		 ==	==
+  		 new Cookie(key, value)
+  		 session.setAttribute(key, value)
+  	-->
   	<param-name>driver</param-name>
   	<param-value>oracle.jdbc.driver.OracleDriver</param-value>
   </context-param>
