@@ -28,6 +28,35 @@
 		vo.setAddress(addr2);
 	}
 	int totalpage = dao.foodTotalPage(fd);
+	
+	List<FoodVO> cList = new ArrayList<FoodVO>();
+	//쿠키
+	Cookie[] cookies = request.getCookies();
+	/*
+		1. 생성 부분
+			new Cookie(키, 값); => 값 9문자열로만 저장 가능
+			setPath() : 쿠키 저장 경로 지정
+			setMaxAge() : 쿠키 저장 기간 (초단위)
+			=> client에 쿠키 전송 => response.addCookie()
+			
+		2. 쿠키 읽기
+			Cookie[] cookies = request.getCookies();
+			getName() => key를 읽어옴
+			getValue() => value를 읽어옴
+		3. 쿠키 삭제
+			setMaxAge(0) => 기간을 0을 주면 삭제
+	*/
+	if(cookies != null){
+		// 최신 페이지 => 마지막번째 링크부터 출력
+		for(int i=cookies.length-1; i>=0; i--){
+			if(cookies[i].getName().startsWith("f")){
+				// f부터 시작 (detail_before에서 "f" + fno로 줘서 f부터 시작)
+				String no = cookies[i].getValue();
+				FoodVO vo = dao.foodDetail(Integer.parseInt(no));
+				cList.add(vo);
+			}
+		}
+	}
 %>
 <!DOCTYPE html>
 <html>
@@ -109,8 +138,6 @@
 			%>
 		</div>
 	</div>
-	<h1>최신 본 맛집 (쿠키)</h1>
-	<hr>
 	<%--
 		php, asp, nodeJs, ... 모두 request, response, session 가지고 있음
 		request, response => C (요청) / S (응답)
@@ -125,23 +152,30 @@
 				= 쿠키 생성
 					Cookie cookie = new Cookie(key, value)
 				= 저장된 위치 (path)
-					setPath("/"
+					setPath("/")
 				= 기간 설정
 					setMaxAge(초단위) => 60*60*24 : 하루
 				= 클라이언트로 전송
 					addCookie
 			
 	 --%>
+	<h1>최신 본 맛집 (쿠키)</h1>
+	<a href="cookie_delete.jsp">쿠키삭제</a>
+	<hr>
 	<div>
-		
+		<%
+			int k=0;
+			for(FoodVO vo : cList){
+				if(k>9){
+					break;
+				}
+		%>
+				<a href="food_detail.jsp?no=<%=vo.getFno()%>"><img src="<%=vo.getPoster().substring(0, vo.getPoster().indexOf("^")) %>" 
+				width="100" height="100"></a>
+		<%
+				k++;
+			}
+		%>
 	</div>
 </body>
 </html>
-
-
-
-
-
-
-
-

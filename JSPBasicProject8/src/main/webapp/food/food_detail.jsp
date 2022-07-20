@@ -8,7 +8,6 @@
 	String address = vo.getAddress();
 	String addr1 = address.substring(0, address.lastIndexOf("지"));
 	String addr2 = address.substring(address.lastIndexOf("번")+1);
-	// String addr2 = address.substring(address.lastIndexOf("번")+1, address.length());
 %>
 <!DOCTYPE html>
 <html>
@@ -119,6 +118,13 @@
 					<%
 						}
 					%>
+					<tr>
+						<td colspan="2" align="right">
+							<a href="#">찜하기</a>&nbsp;
+							<a href="#">예약</a>&nbsp;
+							<a href="food_list.jsp">목록</a>&nbsp;
+						</td>
+					</tr>
 				</table>
 			</div>
 			<%-- 지도 출력 --%>
