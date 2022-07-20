@@ -78,7 +78,13 @@
 			<%
 				for(FoodVO vo : list){
 			%>
-				<a class="food">
+			<%-- 
+				response => 전송
+						1) HTML
+						2) Cookie
+						=> 한개의 JSP에서는 두개를 동시에 전송 불가능
+			 --%>
+				<a class="food" href="detail_before.jsp?no=<%=vo.getFno()%>">
 					<img src="<%=vo.getPoster() %>" style="width: 230px; height: 150px">
 					<div class="food_name"><%=vo.getName() %>&nbsp;<span style="color:orange"><%=vo.getScore() %> </div>
 					<div class="food_name"><%=vo.getType() %>-<%=vo.getAddress() %></div>
@@ -103,5 +109,39 @@
 			%>
 		</div>
 	</div>
+	<h1>최신 본 맛집 (쿠키)</h1>
+	<hr>
+	<%--
+		php, asp, nodeJs, ... 모두 request, response, session 가지고 있음
+		request, response => C (요청) / S (응답)
+		session
+		application, out
+		-------------------------- 내장 객체
+		일반객체
+		cookie => 자동 로그인, 최신 방문  (로그인 => id, pwd 노출 => 보안 위험) => 쓰려면 암호화
+			자신 컴퓨터에 저장 (로컬)
+			
+			1. 쿠키 사용법		=> 단점 => 저장되는 데이터가 문자열 		session은 Object로 저장
+				= 쿠키 생성
+					Cookie cookie = new Cookie(key, value)
+				= 저장된 위치 (path)
+					setPath("/"
+				= 기간 설정
+					setMaxAge(초단위) => 60*60*24 : 하루
+				= 클라이언트로 전송
+					addCookie
+			
+	 --%>
+	<div>
+		
+	</div>
 </body>
 </html>
+
+
+
+
+
+
+
+
