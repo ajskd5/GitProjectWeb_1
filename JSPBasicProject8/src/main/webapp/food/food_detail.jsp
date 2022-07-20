@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.*, com.sist.dao.*"%>
 <%
+
 	String no = request.getParameter("no");
 	FoodDAO dao = new FoodDAO();
-	FoodVO vo= dao.foodDetail(Integer.parseInt(no));
+	FoodVO vo= dao.foodDetailData(Integer.parseInt(no));
 	
 	String address = vo.getAddress();
 	String addr1 = address.substring(0, address.lastIndexOf("지"));

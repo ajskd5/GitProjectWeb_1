@@ -34,27 +34,27 @@
 	Cookie[] cookies = request.getCookies();
 	/*
 		1. 생성 부분
-			new Cookie(키, 값); => 값 9문자열로만 저장 가능
-			setPath() : 쿠키 저장 경로 지정
-			setMaxAge() : 쿠키 저장 기간 (초단위)
-			=> client에 쿠키 전송 => response.addCookie()
-			
+	new Cookie(키, 값); => 값 9문자열로만 저장 가능
+	setPath() : 쿠키 저장 경로 지정
+	setMaxAge() : 쿠키 저장 기간 (초단위)
+	=> client에 쿠키 전송 => response.addCookie()
+	
 		2. 쿠키 읽기
-			Cookie[] cookies = request.getCookies();
-			getName() => key를 읽어옴
-			getValue() => value를 읽어옴
+	Cookie[] cookies = request.getCookies();
+	getName() => key를 읽어옴
+	getValue() => value를 읽어옴
 		3. 쿠키 삭제
-			setMaxAge(0) => 기간을 0을 주면 삭제
+	setMaxAge(0) => 기간을 0을 주면 삭제
 	*/
 	if(cookies != null){
 		// 최신 페이지 => 마지막번째 링크부터 출력
 		for(int i=cookies.length-1; i>=0; i--){
-			if(cookies[i].getName().startsWith("f")){
-				// f부터 시작 (detail_before에서 "f" + fno로 줘서 f부터 시작)
-				String no = cookies[i].getValue();
-				FoodVO vo = dao.foodDetail(Integer.parseInt(no));
-				cList.add(vo);
-			}
+	if(cookies[i].getName().startsWith("f")){
+		// f부터 시작 (detail_before에서 "f" + fno로 줘서 f부터 시작)
+		String no = cookies[i].getValue();
+		FoodVO vo = dao.foodDetailData(Integer.parseInt(no));
+		cList.add(vo);
+	}
 		}
 	}
 %>

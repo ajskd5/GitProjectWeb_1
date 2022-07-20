@@ -68,7 +68,7 @@ public class FoodDAO {
 	}
 	
 	// 상세 보기
-	public FoodVO foodDetail(int no) {
+	public FoodVO foodDetailData(int no) {
 		FoodVO vo = new FoodVO();
 		try {
 			conn = dbconn.getConnection();
