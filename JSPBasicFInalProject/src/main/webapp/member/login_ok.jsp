@@ -1,12 +1,38 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-
-</body>
-</html>
+    pageEncoding="UTF-8" import="com.sist.dao.*" %>
+<jsp:useBean id="dao" class="com.sist.dao.MemberDAO"/>
+<%-- MemberDAO dao = new MemberDAO()  이거랑 같음 --%>
+<%
+	// login.jsp 에서 id, pwd 보내줌
+	// 1. 사용자가 보내준 요청 데이터 받기
+	// 2. 데이터베이스 연결 => 요청 처리에 필요한 데이터 읽기
+	String id = request.getParameter("id");
+	String pwd = request.getParameter("pwd");
+	String result = dao.isLogin(id, pwd);
+	
+	if(result.equals("NOID")){
+		// ID 없는 상태
+%>
+		<script>
+			alert("아이디가 존재하지 않습니다!!");
+			history.back();
+		</script>
+<%
+		
+	} else if(result.equals("NOPWD")){
+		// PWD 틀린 상태
+%>
+		<script>
+			alert("비밀번호가 틀렸습니다!!");
+			history.back();
+		</script>
+<%
+	} else {
+		// 로그인 성공
+		session.setAttribute("id", id);
+		session.setAttribute("name", result);
+		
+		//  main.jsp로 이동
+		response.sendRedirect("../main/main.jsp");
+	}
+%>
