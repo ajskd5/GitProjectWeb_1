@@ -18,7 +18,7 @@
 			for(int i=0; i<12; i++){
 				CategoryBean vo = list.get(i);
 		%>
-				<div class="col-md-3"> <%-- 한줄에 12개 출력 => 3이면 4개씩 --%>
+				<div class="col-md-3"> <%-- 한줄 총 길이 => 3칸씩이면 한줄에 4개 --%>
 					<div class="thumbnail">
 						<a href="#">
 							<img src="<%=vo.getPoster()%>" alt ="lights" style="width:100%">
