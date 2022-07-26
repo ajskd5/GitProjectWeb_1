@@ -20,22 +20,55 @@
 	width: 750px;
 }
 </style>
-<script type="text/javascript" src="https://code.jquery.com/jquery.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
-let i=0;
-$(function(){ // window.onload (java=> main())
+let i=0;// 전역변수
+$(function(){ // window.onload (Java=main())
 	$('.btn-warning').click(function(){
-		if(i==0){
+		if(i==0)
+		{
 			$('#delTr').show();
 			$('.btn-warning').text('취소');
 			i=1;
-		} else {
+		}
+		else
+		{
 			$('#delTr').hide();
 			$('.btn-warning').text('삭제');
 			i=0;
 		}
-	});
-});
+	})
+	
+	$('#delBtn').on("click",function(){
+		let pwd=$('#pwd').val();
+		if(pwd.trim()=="")
+		{
+			$('#pwd').focus();
+			return;
+		}
+		let no=$('#pwd').attr("data-no");
+		
+		$.ajax({
+			type:'post',
+			url:'delete.jsp',
+			data:{"no":no,"pwd":pwd}, //delete.jsp?no=1&pwd=1234
+			success:function(result)
+			{
+				let res=result.trim();
+				if(res=="yes")
+				{
+					location.href="list.jsp";
+				}
+				else
+				{
+					alert("비밀번호가 틀립니다!");
+					$('#pwd').val("");
+					$('#pwd').focus();
+				}
+			}
+		})
+	})
+})
 </script>
 </head>
 <body>
@@ -77,7 +110,8 @@ $(function(){ // window.onload (java=> main())
 				</tr>
 				<tr id="delTr" style=" display: none">
 					<td colspan="4" class="text-right">
-						비밀번호 : <input type="password" name="pwd" size="15" class="input-sm" id="pwd">
+						<%-- HTML (태그는 사용자 정의(X)  /  속성은 사용자 정의 --%>
+						비밀번호 : <input type="password" name="pwd" size="15" class="input-sm" id="pwd" data-no="${vo.no }">
 						<input type="button" id="delBtn" value="삭제" class="btn btn-sm btn-primary">
 					</td>
 				</tr>

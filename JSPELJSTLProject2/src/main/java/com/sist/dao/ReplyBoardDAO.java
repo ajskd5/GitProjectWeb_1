@@ -271,4 +271,76 @@ public class ReplyBoardDAO {
 		}
 		return bCheck;
 	}
+	
+	// 삭제
+	public String boardDelete(int no, String pwd) {
+		String result = "";
+		try {
+			getConnection();
+			conn.setAutoCommit(false);
+			// 비밀번소 
+			String sql = "SELECT pwd FROM replyBoard "
+					+ "WHERE no=?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, no);
+			ResultSet rs = ps.executeQuery();
+			rs.next();
+			String db_pwd = rs.getString(1);
+			
+			if(db_pwd.equals(pwd)) {
+				result = "yes";
+				sql = "SELECT root, depth FROM replyBoard "
+						+ "WHERE no=?";
+				ps = conn.prepareStatement(sql);
+				ps.setInt(1, no);
+				rs = ps.executeQuery();
+				rs.next();
+				int root = rs.getInt(1);
+				int depth = rs.getInt(2);
+				rs.close();
+				
+				if(depth > 0) { // 답변이 있는 상태
+					sql = "UPDATE replyBoard SET "
+							+ "subject='관리자가 삭제한 게시물입니다!', "
+							+ "content='관리자가 삭제한 게시물입니다!' "
+							+ "WHERE no=?";
+					ps = conn.prepareStatement(sql);
+					ps.setInt(1, no);
+					ps.executeUpdate();
+				} else { // 답변이 없는 상태
+					sql = "DELETE FROM replyBoard "
+							+ "WHERE no=?";
+					ps = conn.prepareStatement(sql);
+					ps.setInt(1, no);
+					ps.executeUpdate();
+				}
+				sql = "UPDATE replyBoard SET "
+						+ "depth = depth-1 "
+						+ "WHERE no=?";
+				ps = conn.prepareStatement(sql);
+				ps.setInt(1, root);
+				ps.executeUpdate();
+			} else {
+				result = "no";
+			}
+			
+			rs.close();
+			conn.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			try {
+				conn.rollback();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		} finally {
+			try {
+				conn.setAutoCommit(true);
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+			disConnection();
+		}
+		return result;
+	}
 }
