@@ -70,4 +70,35 @@ public class BoardModel {
 	}
 	
 	//======================= JSP(요청) : click, 	입력, 마우스 ====> MODEL에서 받아서 처리 === 결과값 ==> JSP
+	
+	// 답변
+	public void boardReplyInsert(HttpServletRequest request, HttpServletResponse response) {
+		try {
+			request.setCharacterEncoding("UTF-8");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		String name = request.getParameter("name");
+		String subject = request.getParameter("subject");
+		String content = request.getParameter("content");
+		String pwd = request.getParameter("pwd");
+		String pno = request.getParameter("pno"); // 상위 게시물
+		
+		ReplyBoardVO vo = new ReplyBoardVO();
+		vo.setName(name);
+		vo.setSubject(subject);
+		vo.setContent(content);
+		vo.setPwd(pwd);
+		
+		// DAO 연동
+		
+		// 화면 이동 (list.jsp)
+		try {
+			response.sendRedirect("list.jsp");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

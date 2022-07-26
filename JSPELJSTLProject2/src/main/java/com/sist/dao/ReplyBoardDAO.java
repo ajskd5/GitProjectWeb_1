@@ -151,6 +151,7 @@ public class ReplyBoardDAO {
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, no);
 			ResultSet rs = ps.executeQuery();
+			rs.next();
 			vo.setNo(rs.getInt(1));
 			vo.setName(rs.getString(2));
 			vo.setSubject(rs.getString(3));
