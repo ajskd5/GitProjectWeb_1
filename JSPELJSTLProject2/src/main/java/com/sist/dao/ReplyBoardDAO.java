@@ -133,4 +133,37 @@ public class ReplyBoardDAO {
 		}
 	}
 	
+	// 상세보기
+	public ReplyBoardVO boardDetailData(int no) {
+		ReplyBoardVO vo = new ReplyBoardVO();
+		try {
+			getConnection();
+			String sql = "UPDATE replyBoard SET "
+					+ "hit = hit + 1 "
+					+ "WHERE no = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, no);
+			ps.executeUpdate();
+			
+			sql = "SELECT no, name, subject, content, regdate, hit, pwd "
+					+ "FROM replyBoard "
+					+ "WHERE no = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, no);
+			ResultSet rs = ps.executeQuery();
+			vo.setNo(rs.getInt(1));
+			vo.setName(rs.getString(2));
+			vo.setSubject(rs.getString(3));
+			vo.setContent(rs.getString(4));
+			vo.setRegdate(rs.getDate(5));
+			vo.setHit(rs.getInt(6));
+			vo.setPwd(rs.getString(7));
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			disConnection();
+		}
+		return vo;
+	}
+	
 }

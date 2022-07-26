@@ -70,7 +70,11 @@ body{
 								</c:forEach>
 								<img src="re_icon.gif">
 							</c:if>
-							${vo.subject }
+							<a href="detail.jsp?no=${vo.no }" >${vo.subject }</a>
+							&nbsp;
+							<c:if test="${today == vo.dbday}">
+								<sup><img src="new.gif"></sup>
+							</c:if>
 						</td>
 						<td width="15%" class="text-center">${vo.name }</td>
 						<td width="20%" class="text-center">${vo.dbday }</td>

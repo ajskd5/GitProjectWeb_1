@@ -2,6 +2,7 @@ package com.sist.model;
 import java.io.IOException;
 import java.util.*;
 import com.sist.dao.*;
+import java.text.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -22,6 +23,8 @@ public class BoardModel {
 		request.setAttribute("totalpage", totalpage);
 		request.setAttribute("count", count);
 		request.setAttribute("list", list);
+		String today = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+		request.setAttribute("today", today);
 	}
 	
 	// 글쓰기
@@ -55,4 +58,16 @@ public class BoardModel {
 		// JSP는 화면에 출력만, 모든 처리는 Java에서 함 => MVC
 		// MODEL => vo, dao, model
 	}
+	
+	// 상세보기
+	public void boardDetailData(HttpServletRequest request) {
+		String no = request.getParameter("no");
+		ReplyBoardDAO dao = new ReplyBoardDAO();
+		ReplyBoardVO vo =  dao.boardDetailData(Integer.parseInt(no));
+		
+		// JSP로 전송 (dao.boardDetailData 결과값 = vo => 여기서 vo 그대로 받음)
+		request.setAttribute("vo", vo);
+	}
+	
+	//======================= JSP(요청) : click, 	입력, 마우스 ====> MODEL에서 받아서 처리 === 결과값 ==> JSP
 }
