@@ -33,8 +33,8 @@ $(function(){ // window.onload (java=> main())
 			$('.btn-warning').text('삭제');
 			i=0;
 		}
-	})
-})
+	});
+});
 </script>
 </head>
 <body>
