@@ -20,7 +20,8 @@
 	width: 750px;
 }
 </style>
-<script type="text/javascript" src="http://code.jquery.com/jquery.js">
+<script type="text/javascript" src="https://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
 let i=0;
 $(function(){ // window.onload (java=> main())
 	$('.btn-warning').click(function(){
@@ -69,7 +70,7 @@ $(function(){ // window.onload (java=> main())
 				<tr>
 					<td colspan="4" class="text-right">
 						<a href="reply.jsp?pno=${vo.no }" class="btn btn-xs btn-danger">답변</a>
-						<a href="#" class="btn btn-xs btn-info">수정</a>
+						<a href="update.jsp?no=${vo.no }" class="btn btn-xs btn-info">수정</a>
 						<a href="#" class="btn btn-xs btn-warning">삭제</a>
 						<a href="list.jsp" class="btn btn-xs btn-success">목록</a>
 					</td>
