@@ -211,4 +211,64 @@ public class ReplyBoardDAO {
 		return vo;
 	}
 	
+	// 수정하기 (데이터 읽어오기)
+	public ReplyBoardVO boardUpdateData(int no) {
+		ReplyBoardVO vo = new ReplyBoardVO();
+		try {
+			getConnection();
+			String sql = "SELECT no, name, subject, content "
+					+ "FROM replyBoard "
+					+ "WHERE no = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, no);
+			ResultSet rs = ps.executeQuery();
+			rs.next();
+			vo.setNo(rs.getInt(1));
+			vo.setName(rs.getString(2));
+			vo.setSubject(rs.getString(3));
+			vo.setContent(rs.getString(4));
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			disConnection();
+		}
+		return vo;
+	}
+	// 수정하기
+	public boolean boardUpdate(ReplyBoardVO vo) {
+		boolean bCheck = false;
+		try {
+			getConnection();
+			String sql = "SELECT pwd FROM replyBoard "
+					+ "WHERE no=?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, vo.getNo());
+			ResultSet rs = ps.executeQuery();
+			rs.next();
+			String db_pwd = rs.getString(1);
+			rs.close();
+			
+			if(db_pwd.equals(vo.getPwd())) {
+				bCheck = true;
+				// 수정
+				sql = "UPDATE replyBoard SET "
+						+ "name=?, subject=?, content=? "
+						+ "WHERE no=?";
+				ps = conn.prepareStatement(sql);
+				ps.setString(1, vo.getName());
+				ps.setString(2, vo.getSubject());
+				ps.setString(3, vo.getContent());
+				ps.setInt(4, vo.getNo());
+				ps.executeUpdate();
+			} else {
+				bCheck = false;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			disConnection();
+		}
+		return bCheck;
+	}
 }

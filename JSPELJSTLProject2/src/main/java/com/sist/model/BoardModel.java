@@ -1,10 +1,10 @@
 package com.sist.model;
 import java.io.IOException;
+import java.net.http.HttpRequest;
 import java.util.*;
 import com.sist.dao.*;
 import java.text.*;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 
 public class BoardModel {
 	public void boardListData(HttpServletRequest request) {
@@ -31,7 +31,6 @@ public class BoardModel {
 	public void boardInsert(HttpServletRequest request, HttpServletResponse response) {
 		try {
 			request.setCharacterEncoding("UTF-8");
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -68,14 +67,12 @@ public class BoardModel {
 		// JSP로 전송 (dao.boardDetailData 결과값 = vo => 여기서 vo 그대로 받음)
 		request.setAttribute("vo", vo);
 	}
-	
 	//======================= JSP(요청) : click, 	입력, 마우스 ====> MODEL에서 받아서 처리 === 결과값 ==> JSP
 	
 	// 답변
 	public void boardReplyInsert(HttpServletRequest request, HttpServletResponse response) {
 		try {
 			request.setCharacterEncoding("UTF-8");
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -102,5 +99,46 @@ public class BoardModel {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	// 수정하기 (데이터 가져오기)
+	public void boardUpdateData(HttpServletRequest request) {
+		// update.jsp?no=${vo.no}
+		String no = request.getParameter("no");
+		
+		//DAO에서 데이터 읽기 
+		ReplyBoardDAO dao = new ReplyBoardDAO();
+		ReplyBoardVO vo = dao.boardUpdateData(Integer.parseInt(no));
+		
+		// 읽은 데이터 request에 담아서 넘겨줌 (update.jsp)
+		request.setAttribute("vo", vo);
+	}
+	//수정하기 확인버튼
+	public void boardUpdateOk(HttpServletRequest request) {
+		try {
+			request.setCharacterEncoding("UTF-8");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		String name = request.getParameter("name");
+		String subject = request.getParameter("subject");
+		String content = request.getParameter("content");
+		String pwd = request.getParameter("pwd");
+		String no = request.getParameter("no"); // 상위 게시물
+		
+		ReplyBoardVO vo = new ReplyBoardVO();
+		vo.setName(name);
+		vo.setSubject(subject);
+		vo.setContent(content);
+		vo.setPwd(pwd);
+		vo.setNo(Integer.parseInt(no));
+		
+		// DAO 연동
+		ReplyBoardDAO dao = new ReplyBoardDAO();
+		
+		// 결과값 전송
+		boolean bCheck = dao.boardUpdate(vo);
+		request.setAttribute("bCheck", bCheck);
+		request.setAttribute("no", no);
 	}
 }
