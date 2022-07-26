@@ -92,6 +92,8 @@ public class BoardModel {
 		vo.setPwd(pwd);
 		
 		// DAO 연동
+		ReplyBoardDAO dao = new ReplyBoardDAO();
+		dao.replyInsert(Integer.parseInt(pno), vo);
 		
 		// 화면 이동 (list.jsp)
 		try {

@@ -34,7 +34,7 @@ $(function(){ // window.onload (java=> main())
 			i=0;
 		}
 	})
-)}
+})
 </script>
 </head>
 <body>
