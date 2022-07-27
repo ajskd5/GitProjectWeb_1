@@ -46,7 +46,7 @@ public class FoodDAO {
 				end = 18;
 			} else if(no == 3) { // 메뉴별 인기 맛집
 				start = 19;
-				no = 30;
+				end = 30;
 			}
 			getConnection(); // 미리 생성된 Connection객체 얻어옴
 			String sql = "SELECT cno, title, subject, poster "
@@ -69,6 +69,35 @@ public class FoodDAO {
 			e.printStackTrace();
 		} finally {
 			disConnection(); // POOL로 재사용을 하기 위해 반환함
+		}
+		return list;
+	}
+	// 카테고리 리스트
+	public List<FoodVO> food_listData(int cno){
+		List<FoodVO> list = new ArrayList<FoodVO>();
+		try {
+			getConnection();
+			String sql = "SELECT fno, name, tel, type, poster, address "
+					+ "FROM food_house "
+					+ "WHERE cno=?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, cno);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				FoodVO vo = new FoodVO();
+				vo.setFno(rs.getInt(1));
+				vo.setName(rs.getString(2));
+				vo.setTel(rs.getString(3));
+				vo.setType(rs.getString(4));
+				vo.setPoster(rs.getString(5));
+				vo.setAddress(rs.getString(6));
+				list.add(vo);
+			}
+			rs.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			disConnection();
 		}
 		return list;
 	}
