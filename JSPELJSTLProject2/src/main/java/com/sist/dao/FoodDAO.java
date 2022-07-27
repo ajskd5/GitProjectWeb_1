@@ -43,7 +43,7 @@ public class FoodDAO {
 				end = 18;
 			} else if(no == 3) { // 메뉴별 인기 맛집
 				start = 19;
-				no = 30;
+				end = 30;
 			}
 			getConnection(); // 미리 생성된 Connection객체 얻어옴
 			String sql = "SELECT cno, title, subject, poster "
