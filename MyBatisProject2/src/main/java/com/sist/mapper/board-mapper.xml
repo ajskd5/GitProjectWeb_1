@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.mapper.board-mapper">
+<!--
+	<select> => SELECT ~ 태그 사이에 SQL문장 한개만 설정
+		<select id="" resultType="" parameterType="">
+					  ==========	=============
+					  실행 결과값		?에 값
+					  WHERE num BETWEEN ? AND ?
+					  VO에 없는 값을 넣으려면 hashmap으로 넣음
+					  
+	<insert> => INSERT , 서브쿼리
+		<insert id="" parameterType="">
+	<update> => UPDATE
+		<update id="" parameterType="">
+	<delete> => DELETE
+		<delete id="" parameterType="">
+	<sql>	 => 공통 SQL
+		<sql id="">
+-->
+<!-- 목록 출력 -->
+	<select id="boardListData" resultType="BoardVO" parameterType="hashmap">
+		SELECT no, subject, name, regdate, hit, num
+		FROM (SELECT no, subject, name, regdate, hit, rownum as num 
+		FROM (SELECT /*+ INDEX_DESC(myBoard myb_no_pk)*/no, subject, name, regdate, hit 
+		FROM myBoard))
+		WHERE num BETWEEN #{start} AND #{end}
+		<!-- 
+			Map map = new HashMap();
+			map.put("start", 1);
+			map.put("end", 10);
+			#{start} => map.get("start")
+			#{end} => map.get("end")
+		 -->
+	</select>
+	<sql id="where-no">
+		WHERE no=#{no}
+	</sql>
+	<update id="boardHitIncrement" parameterType="int">
+		UPDATE myBoard SET
+		hit = hit + 1
+		<include refid="where-no"/>
+	</update>
+	<select id="boardDetailData" resultType="BoardVO" parameterType="int">
+		SELECT * FROM myBoard
+		<include refid="where-no"/>
+	</select>
+</mapper>
