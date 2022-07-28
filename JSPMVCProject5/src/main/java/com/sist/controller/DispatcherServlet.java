@@ -17,7 +17,7 @@ import com.sist.model.*;
 public class DispatcherServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	List<String> clsList = new ArrayList<String>();
-	
+
 	public void init(ServletConfig config) throws ServletException {
 		clsList.add("com.sist.model.FoodModel");
 	}
