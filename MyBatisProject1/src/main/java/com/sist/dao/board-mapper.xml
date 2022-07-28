@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+	PreparedStatement, ResultSet 이 여기서 생성됨
+ -->
+<mapper namespace="com.sist.dao.board-mapper">
+	<!-- SQL 문장 저장 -->
+	<select id="boardListData" resultType="MyBoardVO">
+		SELECT * FROM myBoard
+	</select>
+	<select id="boardCount" resultType="int">
+		SELECT COUNT(*) FROM myBoard
+	</select>
+</mapper>

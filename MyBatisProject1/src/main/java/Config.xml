@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!-- 
+	Connection 관련 => getConnection, disConnection
+ -->
+<configuration>
+	<!-- 
+		(properties?, settings?, typeAliases?, typeHandlers?, objectFactory?, objectWrapperFactory?, 
+	 	reflectorFactory?, plugins?, environments?, databaseIdProvider?, mappers?)
+	 	
+	 태그 사용 순서대로 써야함
+	 	열었으면 무조건 닫기
+	 	<properties></properties>  // <properties/>
+	 	
+	 	주 사용 태그
+	 	properties : 데이터베이스 정보를 저장한 .properties 파일 읽을때 사용
+	 	typeAliases : VO 등록
+	 	environments : connection => driver, username, password, url
+	 	mappers : SQL 파일 위치
+	 	
+	 	? = 0번 1번 사용할 수 있다 (필요시에 사용할 수 있는데 한번만 사용 가능) 
+	 	* = 0번 이상 (여러번 사용 가능)
+	 	+ = 1번 이상 (반드시 한번이상 사용)
+	 	| = 선택 (둘중에 하나 선택)
+	 	default = 반드시 한번만 사용
+	 -->
+	 <typeAliases>
+	 	<!-- (typeAlias*, package*) VO 등록
+	 			SQL문장 제작 = 실행, 결과값 받는 일 (MyBatis)
+	 	-->
+	 	<typeAlias type="com.sist.dao.MyBoardVO" alias="MyBoardVO"/>
+	 </typeAliases>
+	 <!-- 연결 (getConnection, disConnection()) -->
+	 <environments default="development">
+	 	<!--  "(environment)+" 무조건 사용(+) default랑 id랑 동일해야함 -->
+	 	<environment id="development">
+	 		<!-- "(transactionManager,dataSource)" 반드시 한번사용 -->
+	 		<transactionManager type="JDBC"/>
+	 		<dataSource type="POOLED">
+	 			<!-- POOLED		=> DBCP
+	 				 UNPOOLED	=> JDBC
+	 			 -->
+	 			 <property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
+	 			 	<!-- Class.forName("")이게 만들어짐 -->
+	 			 	
+	 			 <property name="url" value="jdbc:oracle:thin:@localhost:1521:XE"/><!-- 211.63.89.131 강사님 ip -->
+	 			 <property name="username" value="hr"/>
+	 			 <property name="password" value="happy"/>
+	 			 <!-- 
+	 			 		getConnection()
+	 			 		= conn = DriverManager.getConnection(url, username, password)
+	 			  -->
+	 		</dataSource>
+	 	</environment>
+	 </environments>
+	 <mappers>
+	 	<!-- (mapper*, package*) -->
+	 	<mapper resource="com/sist/dao/board-mapper.xml"/><!-- SQL문장 저장 위치 -->
+	 </mappers>
+</configuration>
