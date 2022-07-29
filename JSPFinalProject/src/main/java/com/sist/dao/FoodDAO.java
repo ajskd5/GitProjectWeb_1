@@ -62,7 +62,7 @@ public class FoodDAO {
 		return list;
 	}
 	
-	/*
+	/* 카테고리 제목, 부제목 가져오기
 	<select id="foodCategoryInfoData" resultType="FoodCategoryVO" parameterType="int">
 		SELECT title, subject
 		FROM food_category
@@ -75,6 +75,21 @@ public class FoodDAO {
 		try {
 			session = ssf.openSession();
 			vo = session.selectOne("foodCategoryInfoData", cno);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return vo;
+	}
+	
+	//상세보기
+	public static FoodVO foodDetailData(int fno) {
+		SqlSession session = null;
+		FoodVO vo = null;
+		try {
+			session = ssf.openSession();
+			vo = session.selectOne("foodDetailData", fno);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

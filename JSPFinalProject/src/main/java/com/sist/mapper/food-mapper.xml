@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+	select <select>
+		selectList
+		selectOne
+	insert <insert>
+		insert
+	update <update>
+		update
+	delete <delete>
+		delete
+	
+	? ==> #{}
+		parameterType="데이터형"
+ -->
 <mapper namespace="com.sist.mapper.food-mapper">
 	<!-- 맛집 카테고리 읽기 -->
 	<select id="foodCategoryData" resultType="FoodCategoryVO">
@@ -21,5 +35,10 @@
 		SELECT title, subject
 		FROM food_category
 		WHERE cno = #{cno}
+	</select>
+	
+	<!-- 상세보기 -->
+	<select id="foodDetailData" resultType="FoodVO" parameterType="int">
+		SELECT * FROM food_house WHERE fno = #{fno}
 	</select>
 </mapper>
