@@ -5,10 +5,9 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-
 import com.sist.vo.*;
-
 import java.io.*;
+
 public class FoodDAO {
 	// XML 파싱 (등록된 데이터 읽기)
 	private static SqlSessionFactory ssf;
@@ -38,5 +37,49 @@ public class FoodDAO {
 			session.close();
 		}
 		return list;
+	}
+	
+	// 카테고리 리스트
+	/*
+	<select id="foodListData" resultType="FoodVO" parameterType="int">
+		SELECT fno, poster, name, tel, type
+		FROM food_house
+		WHERE cno = #{cno}
+	</select>
+	*/
+	public static List<FoodVO> foodListData(int cno){
+		SqlSession session = null;
+		List<FoodVO> list = null;
+		try {
+			session = ssf.openSession();
+			list = session.selectList("foodListData", cno);
+			// WHERE cno = #{cno} => #(?)여기에 값 넣어줌 ▲
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return list;
+	}
+	
+	/*
+	<select id="foodCategoryInfoData" resultType="FoodCategoryVO" parameterType="int">
+		SELECT title, subject
+		FROM food_category
+		WHERE cno = #{cno}
+	</select>
+	 */
+	public static FoodCategoryVO foodCategoryInfoData(int cno) {
+		SqlSession session = null;
+		FoodCategoryVO vo = null;
+		try {
+			session = ssf.openSession();
+			vo = session.selectOne("foodCategoryInfoData", cno);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return vo;
 	}
 }
