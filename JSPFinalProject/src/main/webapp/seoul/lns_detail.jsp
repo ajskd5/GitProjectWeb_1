@@ -29,24 +29,24 @@
     <div class="content three_quarter first"> 
       <!-- ################################################################################################ -->
       <div class="row">
-      	<table class="table">
-      		<tr>
-      			<td class="text-center"><h3>${vo.title }</h3></td>
-      		</tr>
-      		<tr>
-      			<td class="text-center">
-      				<img src="${vo.poster }" style="width:100%">
-      			</td>
-      		</tr>
-      		<tr>
-      			<td>${vo.msg }</td>
-      		</tr>
-      		<tr>
-      			<td>${vo.address }</td>
-      		</tr>
-      	</table>
+        <table class="table">
+          <tr>
+           <td class="text-center"><h3>${vo.title }</h3></td>
+          </tr>
+          <tr>
+           <td class="text-center">
+             <img src="${vo.poster }" style="width: 100%">
+           </td>
+          </tr>
+          <tr>
+            <td>${vo.msg }</td>
+          </tr>
+          <tr>
+            <td>${vo.address }</td>
+          </tr>
+        </table>
       </div>
-      <div id="comments">
+      <div id="comments">    
         <h2>Comments</h2>
         <ul>
           <li>
@@ -99,7 +99,7 @@
     <!-- ################################################################################################ --> 
     <!-- ################################################################################################ -->
     <div class="sidebar one_quarter"> 
-    <%-- 인근 맛집 --%>
+      <%-- 인근 맛집 --%>
     </div>
     <!-- ################################################################################################ --> 
     <!-- / main body -->
