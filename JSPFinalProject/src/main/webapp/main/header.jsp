@@ -44,15 +44,15 @@
           <li><a href="pages/sidebar-left.html">맛집 예약</a></li>
         </ul>
       </li>
-      <li><a class="drop" href="#">레시피</a>
+      <li><a class="drop" href="../recipe/recipe_list.do">레시피</a>
         <ul>
-          <li><a href="pages/gallery.html">레시피 목록</a></li>
-          <li><a href="pages/full-width.html">쉐프</a></li>
-          <li><a href="pages/gallery.html">가격 비교</a></li>
-          <li><a href="pages/sidebar-left.html">레시피 만들기</a></li>
+          <li><a href="../recipe/recipe_list.do">레시피 목록</a></li>
+          <li><a href="../recipe/chef_list.do">쉐프</a></li>
+          <li><a href="../recipe/list.do">가격 비교</a></li>
+          <li><a href="../recipe/list.do">레시피 만들기</a></li>
         </ul>
       </li>
-      <li><a class="drop" href="#">서울여행</a>
+      <li><a class="drop" href="../seoul/location.do">서울여행</a>
         <ul>
           <li><a href="../seoul/location.do">명소</a></li>
           <%--
