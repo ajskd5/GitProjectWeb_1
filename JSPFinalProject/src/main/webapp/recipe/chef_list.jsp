@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,7 +25,62 @@
 	<div class="wrapper row3">
 	  <main class="container clear">
 	    <h2 class="sectiontitle">쉐프 목록</h2>
-
+		<table class="table">
+		  <tr>
+		    <td>
+		      <c:forEach var="vo" items="${list }">
+		        <table class="table">
+		          <tr>
+		            <td width="30%" class="text-center" rowspan="2">
+		              <img src="${vo.poster }" style="width: 100px; height: 100px" class="img-circle">
+		            </td>
+		            <td colspan="4">
+		              <h3 style="color: orange;">${vo.chef }</h3>
+		            </td>
+		          </tr>
+		          <tr>
+		            <td class="text-center">
+		              <img src="../recipe/images/mem1.png">${vo.mem_cont1 }
+		            </td>
+		            <td class="text-center">
+		              <img src="../recipe/images/mem2.png">${vo.mem_cont2 }
+		            </td>
+		            <td class="text-center">
+		              <img src="../recipe/images/mem7.png">${vo.mem_cont7 }
+		            </td>
+		            <td class="text-center">
+		              <img src="../recipe/images/mem3.png">${vo.mem_cont3 }
+		            </td>
+		          </tr>
+		        </table>
+		      </c:forEach>
+		    </td>
+		  </tr>
+		</table>
+		<%-- 페이지 출력 --%>
+		<div class="row3">
+	      <div class="row" style="margin-left: 270px">
+	          <ul class="pagination">
+	            <c:if test="${startPage>1 }">
+			      <li><a href="../recipe/chef_list.do?page=${startPage-1 }">&laquo;</a></li>
+			    </c:if>
+			      <c:forEach var="i" begin="${startPage }" end="${endPage }">
+			        <c:choose>
+			          <c:when test="${i==curpage }">
+			            <c:set var="style" value="class=active"/>
+			          </c:when>
+			          <c:otherwise>
+			            <c:set var="style" value=""/>
+			          </c:otherwise>
+			        </c:choose>
+			        <li ${style }><a href="../recipe/chef_list.do?page=${i }">${i }</a></li>
+			      </c:forEach>
+			    <c:if test="${endPage<totalpage}">
+			      <li><a href="../recipe/chef_list.do?page=${endPage+1 }">&raquo;</a></li>
+			    </c:if>
+			  </ul>
+	      </div>
+	    </div>
 	  </main>
 	</div>
 </body>
