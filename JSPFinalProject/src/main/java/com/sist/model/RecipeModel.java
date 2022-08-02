@@ -91,4 +91,12 @@ public class RecipeModel {
 		request.setAttribute("main_jsp", "../recipe/chef_list.jsp");
 		return "../main/main.jsp";
 	}
+	
+	@RequestMapping("recipe/chef_make.do")
+	public String chef_make(HttpServletRequest request, HttpServletResponse response) {
+		
+		request.setAttribute("main_jsp", "../recipe/chef_make.jsp");
+		return "../main/main.jsp";
+	}
+	
 }

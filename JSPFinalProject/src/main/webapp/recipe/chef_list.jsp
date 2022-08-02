@@ -32,10 +32,12 @@
 		        <table class="table">
 		          <tr>
 		            <td width="30%" class="text-center" rowspan="2">
-		              <img src="${vo.poster }" style="width: 100px; height: 100px" class="img-circle">
+		              <a href="../recipe/chef_make.do?chef=${vo.chef }">
+		                <img src="${vo.poster }" style="width: 100px; height: 100px" class="img-circle">
+		              </a>
 		            </td>
 		            <td colspan="4">
-		              <h3 style="color: orange;">${vo.chef }</h3>
+		              <a href="../recipe/chef_make.do?chef=${vo.chef }"><h3 style="color: orange;">${vo.chef }</h3></a>
 		            </td>
 		          </tr>
 		          <tr>
