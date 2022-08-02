@@ -31,8 +31,8 @@ public class RecipeModel {
 		// 글자수 조정
 		for(RecipeVO vo : list) {
 			String title = vo.getTitle();
-			if(title.length()>30) {
-				title = title.substring(0, 30) + "...";
+			if(title.length()>25) {
+				title = title.substring(0, 25) + "...";
 			}
 			vo.setTitle(title);
 		}
