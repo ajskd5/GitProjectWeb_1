@@ -96,5 +96,63 @@ public class FreeBoardDAO {
 		return vo;
 	}
 	
+	// 게시글 수정하기
+	public static FreeBoardVO boardUpdateData(int no) {
+		FreeBoardVO vo = new FreeBoardVO();
+		SqlSession session=null;
+		try{
+			session=ssf.openSession();
+			vo=session.selectOne("boardDetailData", no);
+		}catch(Exception ex){
+			System.out.println("DAO boardDetailData : error");
+			ex.printStackTrace();
+			//session.rollback(); 안써도 catch에 오면 자동 롤백
+		} finally{
+			if(session!=null) {
+				session.close(); // POOL => 반환
+			}
+		}
+		return vo;
+	}
 	
+	// 게시판 비밀번호 가져오기
+	//<select id="boardGetPassword" resultType="String" parameterType="int">
+	public static String boardPwdCheck(int no, String pwd) {
+		String result = "";
+		SqlSession session=null;
+		try {
+			session = ssf.openSession();
+			String db_pwd = session.selectOne("boardGetPassword", no);
+			if(db_pwd.equals(pwd)) {
+				result = "yes";
+			} else {
+				result = "no";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally{
+			if(session!=null) {
+				session.close(); // POOL => 반환
+			}
+		}
+		return result;
+	}
+	
+	// 상세보기 => 수정하기
+	//<update id="boardUpdate" parameterType="FreeBoardVO">
+	public static void boardUpdate(FreeBoardVO vo) {
+		List<FreeBoardVO> list = null;
+		SqlSession session = null;
+		try {
+			session = ssf.openSession(true);
+			session.update("boardUpdate", vo);
+		} catch (Exception e) {
+			System.out.println("DAO boardUpdate error");
+			e.printStackTrace();
+		} finally {
+			if(session != null) {
+				session.close(); // 반환 => POOLED(DBCP) => Connection생성(반환하지 않으면 8개가 끝)
+			}
+		}
+	}
 }
