@@ -16,7 +16,7 @@ $(function(){
 	$('.images').css("cursor", "pointer")
 	$('#logImg').click(function(){
 		Shadowbox.open({
-			content :'member/login.do',
+			content :'../member/login.do',
 			player : 'iframe',
 			title : 'Login',
 			width : 450,
@@ -92,7 +92,7 @@ $(function(){
       <li><a href="#">레시피 스토어</a></li>
       <li><a class="drop" href="#">커뮤니티</a>
         <ul>
-          <li><a href="pages/gallery.html">자유게시판</a></li>
+          <li><a href="../freeboard/list.do">자유게시판</a></li>
           <li><a href="pages/full-width.html">묻고 답하기</a></li>
           <li><a href="pages/sidebar-left.html">공지사항</a></li>
         </ul>

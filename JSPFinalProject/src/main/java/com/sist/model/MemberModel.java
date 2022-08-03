@@ -10,7 +10,7 @@ import com.sist.controller.RequestMapping;
 public class MemberModel {
 	@RequestMapping("member/login.do")
 	public String member_login(HttpServletRequest request, HttpServletResponse response) {
-		
-		return "member/login.jsp";
+		System.out.println("asdf");
+		return "../member/login.jsp";
 	}
 }
