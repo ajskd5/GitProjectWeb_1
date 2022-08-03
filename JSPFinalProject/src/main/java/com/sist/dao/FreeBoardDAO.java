@@ -45,7 +45,7 @@ public class FreeBoardDAO {
 			session=ssf.openSession();
 			total=session.selectOne("boardTotalPage");
 		}catch(Exception ex){
-			System.out.println("boardTotalPage : error");
+			System.out.println("DAO boardTotalPage : error");
 			ex.printStackTrace();
 		}
 		finally{
@@ -73,6 +73,28 @@ public class FreeBoardDAO {
 		}
 	}
 	
-	//
+	//상세보기
+	//<select id="boardDetailData" resultType="FreeBoardVO" parameterType="int">
+	public static FreeBoardVO boardDetailData(int no) {
+		FreeBoardVO vo = new FreeBoardVO();
+		SqlSession session=null;
+		try{
+			session=ssf.openSession();
+			session.update("hitIncrement", no); // 조회수 증가
+			session.commit(); // 커밋
+			vo=session.selectOne("boardDetailData", no);
+		}catch(Exception ex){
+			System.out.println("DAO boardDetailData : error");
+			ex.printStackTrace();
+			//session.rollback(); 안써도 catch에 오면 자동 롤백
+		}
+		finally{
+			if(session!=null) {
+				session.close(); // POOL => 반환
+			}
+		}
+		return vo;
+	}
+	
 	
 }

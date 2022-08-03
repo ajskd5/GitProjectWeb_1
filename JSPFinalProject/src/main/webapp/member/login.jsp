@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>CodePen - Wavy login form</title>
-<link href="https://fonts.googleapis.com/css?family=Asap" rel="stylesheet"><link rel="stylesheet" href="./style.css">
+<link href="https://fonts.googleapis.com/css?family=Asap" rel="stylesheet"><link rel="stylesheet" href="style.css">
 </head>
 <body>
 <!-- partial:index.partial.html -->

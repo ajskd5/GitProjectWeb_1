@@ -27,7 +27,7 @@
 	    <!-- main body --> 
 	    <!-- ################################################################################################ -->
 	    <h2 class="sectiontitle">자유게시판</h2>
-	    <div class="two_third first">
+	    <div class="two_third first" style="height: 450px;">
 	      <table class="table">
 	        <tr>
 	          <td>
@@ -46,7 +46,7 @@
 	        <c:forEach var="vo" items="${list }">
 	          <tr>
 	            <td width="10%" class="text-center">${vo.no }</td>
-	            <td width="45%">${vo.subject }
+	            <td width="45%"><a href="../freeboard/detail.do?no=${vo.no }" >${vo.subject }</a>
 	              &nbsp;&nbsp;
 	              <c:if test="${vo.rcount>0 }"><%-- 댓글 갯수 표시 --%>
 	                (${vo.rcount })
@@ -57,6 +57,22 @@
 	            <td width="10%" class="text-center">${vo.hit }</td>
 	          </tr>
 	        </c:forEach>
+	      </table>
+	      <table class="table">
+	        <tr>
+	          <td class="text-left inline">
+	            <input type="checkbox" name="fd" value="name">이름
+	            <input type="checkbox" name="fd" value="subject">제목
+	            <input type="checkbox" name="fd" value="content">내용
+	            <input type="text" name="ss" size="15" class="input-sm">
+	            <input type="button" value="검색" class="btn btn-sm btn-primary">
+	          </td>
+	          <td class="text-right inline">
+	            <a href="#" class="btn btn-sm btn-success">이전</a>
+	              ${curpage } page / ${totalpage } pages
+	            <a href="#" class="btn btn-sm btn-info">다음</a>
+	          </td>
+	        </tr>
 	      </table>
 	    </div>
         <div class="one_third">2/3</div>

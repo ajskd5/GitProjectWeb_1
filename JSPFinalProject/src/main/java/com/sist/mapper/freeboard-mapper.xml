@@ -22,6 +22,19 @@
 		VALUES((SELECT NVL(MAX(no)+1, 1) FROM project_freeboard), #{name}, #{subject}, #{content}, #{pwd})
 	</insert>
 	
+	<!-- 상세보기 -->
+	  <!-- 조회수 증가 -->
+	<update id="hitIncrement" parameterType="int">
+		UPDATE project_freeboard
+		SET hit = hit+1
+		WHERE no=#{no}
+	</update>
+	<select id="boardDetailData" resultType="FreeBoardVO" parameterType="int">
+		SELECT no, name, subject, content, TO_CHAR(regdate, 'YYYY-MM-DD') as dbday, hit
+		FROM project_freeboard
+		WHERE no=#{no}
+	</select>
+	
 	<!-- 수정 update, 삭제(댓글 삭제) delete -->
 		<!-- 수정 삭제를 위한 비밀번호 가져오기 -->
 	<select id="boardGetPassword" resultType="String" parameterType="int">

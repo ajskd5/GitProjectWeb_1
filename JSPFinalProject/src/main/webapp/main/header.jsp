@@ -5,8 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="member/shadow/css/shadowbox.css">
-<script type="text/javascript" src="member/shadow/js/shadowbox.js"></script>
+<link rel="stylesheet" href="../member/shadow/css/shadowbox.css">
+<script type="text/javascript" src="../member/shadow/js/shadowbox.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 Shadowbox.init({

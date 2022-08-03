@@ -62,4 +62,14 @@ public class FreeBoardModel {
 		FreeBoardDAO.boardInsert(vo);
 		return "redirect:../freeboard/list.do";
 	}
+	
+	@RequestMapping("freeboard/detail.do")
+	public String freeboard_detail(HttpServletRequest request, HttpServletResponse response) {
+		String no = request.getParameter("no");
+		FreeBoardVO vo =  FreeBoardDAO.boardDetailData(Integer.parseInt(no));
+		
+		request.setAttribute("vo", vo);
+		request.setAttribute("main_jsp", "../freeboard/detail.jsp");
+		return "../main/main.jsp";
+	}
 }
