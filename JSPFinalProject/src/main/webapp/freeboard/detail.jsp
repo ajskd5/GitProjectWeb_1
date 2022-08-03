@@ -11,7 +11,7 @@ let i = 0;
 $(function(){
 	$('#del').click(function(){
 		if(i===0){
-			$('#delTr').show();
+			$('#delTr').show("slow"); // 효과
 			$('#del').text("취소");
 			i=1;
 		} else {
