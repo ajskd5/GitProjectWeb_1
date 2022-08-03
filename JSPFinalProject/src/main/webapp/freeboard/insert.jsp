@@ -29,6 +29,7 @@ $(function(){
 			$('#pwd').focus();
 			return;
 		}
+		$('#frm').submit();
 	})
 })
 </script>
@@ -54,7 +55,7 @@ $(function(){
 	    <!-- ################################################################################################ -->
 	    <h2 class="sectiontitle">글쓰기</h2>
 	    <div class="two_third first">
-	    <form method="post" action="../freeboard/insert_ok.do">
+	    <form method="post" action="../freeboard/insert_ok.do" id="frm">
 	      <table class="table">
 	        <tr>
 	          <th width="20%" class="text-right">이름</th>
