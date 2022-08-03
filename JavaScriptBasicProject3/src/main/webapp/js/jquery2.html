@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+$(function(){ // $(document).ready(function(){})     window.onload=function(){}
+	$('div > p').css('color', 'red'); // 바로 밑에 태그 >
+})
+</script>
+</head>
+<body>
+  <div>
+    <p>Hello JQuery(p)</p>
+    <span>Hello Span1</span>
+    <span>
+      <p>Hello span2</p>
+    </span>
+  </div>
+</body>
+</html>
