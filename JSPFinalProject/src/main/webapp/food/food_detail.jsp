@@ -22,8 +22,7 @@
     <div class="two_quarter">
       <table class="table">
         <tr>
-          <td colspan="2"></td>
-            <h4>${vo.name }&nbsp;<span style="color:orange;">${vo.score }</span></h4>
+          <td colspan="2"><h4>${vo.name }&nbsp;<span style="color:orange;">${vo.score }</span></h4></td>
         </tr>
         <tr>
           <th width="30%">주소</th>

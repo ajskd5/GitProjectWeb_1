@@ -59,9 +59,7 @@
 	        </c:forEach>
 	      </table>
 	    </div>
-        <div class="one_third">
-        
-        </div>
+        <div class="one_third">2/3</div>
 	  </main>
 	</div>
 </body>

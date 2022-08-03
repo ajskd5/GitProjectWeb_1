@@ -11,7 +11,7 @@ import com.sist.vo.*;
 @Controller
 public class FreeBoardModel {
 	@RequestMapping("freeboard/list.do")
-	public String asdf(HttpServletRequest request, HttpServletResponse response) {
+	public String freeboard_list(HttpServletRequest request, HttpServletResponse response) {
 		String page = request.getParameter("page");
 		if(page == null) {
 			page = "1";
@@ -33,6 +33,13 @@ public class FreeBoardModel {
 		request.setAttribute("totalpage", totalpage);
 		request.setAttribute("list", list);
 		request.setAttribute("main_jsp", "../freeboard/list.jsp");
+		return "../main/main.jsp";
+	}
+	
+	@RequestMapping("freeboard/insert.do")
+	public String freeboard_insert(HttpServletRequest request, HttpServletResponse response) {
+		
+		request.setAttribute("main_jsp", "../freeboard/insert.jsp");
 		return "../main/main.jsp";
 	}
 }
