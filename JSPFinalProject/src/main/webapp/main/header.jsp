@@ -5,6 +5,26 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="member/shadow/css/shadowbox.css">
+<script type="text/javascript" src="member/shadow/js/shadowbox.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+Shadowbox.init({
+	players:['iframe']
+})
+$(function(){
+	$('.images').css("cursor", "pointer")
+	$('#logImg').click(function(){
+		Shadowbox.open({
+			content :'member/login.do',
+			player : 'iframe',
+			title : 'Login',
+			width : 450,
+			height : 400
+		})
+	})
+})
+</script>
 </head>
 <body>
 <div class="wrapper row1">
@@ -15,8 +35,8 @@
     </div>
     <div class="fl_right">
       <ul class="inline">
-        <li><i class="fa fa-phone"></i> +00 (123) 456 7890</li>
-        <li><i class="fa fa-envelope-o"></i> info@domain.com</li>
+        <li><img src="../main/images/login.png" style="width: 50px; height: 50px" class="images" id="logImg"></li>
+        <li><img src="../main/images/store2.png" style="width: 100px; height: 50px" class="images"></li>
       </ul>
     </div>
     <!-- ################################################################################################ --> 
