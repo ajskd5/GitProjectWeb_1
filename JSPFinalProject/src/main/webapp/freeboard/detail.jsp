@@ -20,6 +20,66 @@ $(function(){
 			i=0;
 		}
 	})
+	
+	//삭제
+	/* 태그명($(태그명)), 아이디명 ($(#아이디명)), 클래스명($(.클래스명))
+		인접 ($(태그명 + 태그명)), 후손($(태그명 태그명)), 자손($(태그명 > 태그명))
+		
+		이벤트 (태그명 | 아이디명)
+			onclick
+				$('태그명').click(function(){
+					처리내용
+				})
+				$('태그명').on("click", function(){
+					처리내용
+				})
+			onmouseover
+			hover
+				$('태그명').hover(function(){
+					
+				})
+			onchange
+				<select> => 예약 (달력)
+				$('태그명').change(function(){
+					
+				})
+			onkeydown,   onkeyup
+			 --채팅--   --검색바--
+			 
+		<input value=> value => val()
+		<td>Hello</td> ==> $('td').text()
+		<a href="data"><img src="data"> 	=> $('a').attr("href")   $('img').attr("src")
+		
+		$('ul').html() ==> ul태그 안에 값 통째로 가져옴 (li태그 통째로)
+	*/
+	$('#delBtn').on("click", function(){
+		let pwd = $('#delPwd').val(); // 입력한 비밀번호 가져오기 val() => 입력된 값 읽음
+		let no = $(this).attr("data-no");
+		if(pwd.trim()===""){
+			$('#delPwd').focus();
+			return;
+		}
+		// ajax => 요청 , 데이터 받기
+		//alert("password : " + pwd + "\n번호 : "+ no); 값 받는지만 확인
+		/*
+			type => GET/POST
+			url  => 처리할 URL주소 => .do
+			data: => ?() 보내줄 데이터
+			success:function(result){
+				정상 수행 : 200  ====> text, xml, json 결과값을 어떤 형태로 보낼지 선택
+									  (html)
+				결과값 받아옴
+			}
+			error:function(ex){
+				에러 : 404, 500, 412, 415, 403, ...
+			}
+				
+		*/
+		$.ajax({
+			
+		})
+	})
+	
 })
 </script>
 </head>
@@ -75,8 +135,8 @@ $(function(){
 	        </tr>
 	        <tr id="delTr" style="display: none">
 	          <td colspan="4" class="text-right inline">
-	            <span>비밀번호 : </span><input type="password" name="pwd" size="10" class="input-sm">
-	            <input type="button" value="삭제" class="btn btn-sm btn-danger">
+	            <span>비밀번호 : </span><input type="password" name="pwd" size="10" class="input-sm" id="delPwd">
+	            <input type="button" value="삭제" class="btn btn-sm btn-danger" id="delBtn" data-no="${vo.no }">
 	          </td>
 	        </tr>
 	      </table>
