@@ -55,7 +55,7 @@ $(function(){
 	$('#delBtn').on("click", function(){
 		let pwd = $('#delPwd').val(); // 입력한 비밀번호 가져오기 val() => 입력된 값 읽음
 		let no = $(this).attr("data-no");
-		if(pwd.trim()===""){
+		if(pwd.trim()==""){
 			$('#delPwd').focus();
 			return;
 		}
@@ -74,8 +74,31 @@ $(function(){
 				에러 : 404, 500, 412, 415, 403, ...
 			}
 				
+		  ../freeboard/delete.do?no=1&pwd=1111 이렇게 넘어감
+		
+			HttpRequest reques; => 브라우저에 존재
+			
+			request.open("post", "url주소", true(비동기))
+											false(동기)
 		*/
 		$.ajax({
+			type: 'post',
+			url: '../freeboard/delete.do',
+			data: {"no":no, "pwd":pwd},
+			success: function(result){
+				let res = result.trim();
+				if(res=="yes"){ // 정상수행 (비밀번호 일치 여부)
+					location.href="../freeboard/list.do"; //sendRedirect()
+				} else {
+					alert("비밀번호가 틀립니다!!");
+					$('#delPwd').val("");//비밀번호 입력란 지우기
+					$('#delPwd').focus();
+				}
+				
+			},
+			fail:function(err){
+				alert(err);
+			}
 			
 		})
 	})

@@ -155,4 +155,32 @@ public class FreeBoardDAO {
 			}
 		}
 	}
+	
+	// 삭제하기
+	//<delete id="boardDelete" parameterType="int">
+	public static String boardDelete(int no, String pwd) {
+		String result = "";
+		SqlSession session = null;
+		try {
+			session = ssf.openSession();
+			//<select id="boardGetPassword" resultType="String" parameterType="int">
+			String db_pwd = session.selectOne("boardGetPassword", no);
+			if(db_pwd.equals(pwd)) {
+				result = "yes";
+				session.delete("boardDelete", no);
+				session.commit();
+			} else {
+				result = "no";
+			}
+
+		} catch (Exception e) {
+			System.out.println("DAO boardDelete error");
+			e.printStackTrace();
+		} finally {
+			if(session != null) {
+				session.close(); // 반환 => POOLED(DBCP) => Connection생성(반환하지 않으면 8개가 끝)
+			}
+		}
+		return result;
+	}
 }

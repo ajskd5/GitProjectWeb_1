@@ -113,4 +113,13 @@ public class FreeBoardModel {
 		FreeBoardDAO.boardUpdate(vo);
 		return "redirect:../freeboard/detail.do?no="+no;
 	}
+	
+	@RequestMapping("freeboard/delete.do")
+	public String freeboard_delete(HttpServletRequest request, HttpServletResponse response) {
+		String no = request.getParameter("no");
+		String pwd = request.getParameter("pwd");
+		String result = FreeBoardDAO.boardDelete(Integer.parseInt(no), pwd);
+		request.setAttribute("result", result);
+		return "../freeboard/delete.jsp";
+	}
 }
