@@ -38,4 +38,38 @@ public class MemberDAO {
 		}
 		return count;
 	}
+	//이메일 중복체크
+	public static int memberEmailCheck(String email) {
+		int count = 0;
+		SqlSession session = null;
+		try {
+			session = ssf.openSession();
+			count = session.selectOne("memberEmailCheck", email);
+		} catch (Exception e) {
+			System.out.println("DAO memberEmailCheck error");
+			e.printStackTrace();
+		} finally {
+			if(session != null) {
+				session.close();
+			}
+		}
+		return count;
+	}
+	//전화번호 중복체크
+		public static int memberTelCheck(String tel) {
+			int count = 0;
+			SqlSession session = null;
+			try {
+				session = ssf.openSession();
+				count = session.selectOne("memberTelCheck", tel);
+			} catch (Exception e) {
+				System.out.println("DAO memberTelCheck error");
+				e.printStackTrace();
+			} finally {
+				if(session != null) {
+					session.close();
+				}
+			}
+			return count;
+		}
 }

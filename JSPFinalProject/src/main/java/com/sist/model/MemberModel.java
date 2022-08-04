@@ -22,6 +22,24 @@ public class MemberModel {
 		request.setAttribute("count", count);
 		return "../member/idcheck_ok.jsp";
 	}
+	// 이메일 중복체크
+	@RequestMapping("member/email_check.do")
+	public String member_email_check(HttpServletRequest request, HttpServletResponse response) {
+		String email = request.getParameter("email");
+		int count = MemberDAO.memberEmailCheck(email);
+		
+		request.setAttribute("count", count);
+		return "../member/idcheck_ok.jsp"; // 이렇게 해도 어차피 count만 출력하는 애라 상관없음
+	}
+	// 전화번호 중복체크
+		@RequestMapping("member/tel_check.do")
+		public String member_tel_check(HttpServletRequest request, HttpServletResponse response) {
+			String tel = request.getParameter("tel");
+			int count = MemberDAO.memberTelCheck(tel);
+			
+			request.setAttribute("count", count);
+			return "../member/idcheck_ok.jsp"; // 이렇게 해도 어차피 count만 출력하는 애라 상관없음
+		}
 	
 	// 로그인창 띄우기
 	@RequestMapping("member/login.do")
