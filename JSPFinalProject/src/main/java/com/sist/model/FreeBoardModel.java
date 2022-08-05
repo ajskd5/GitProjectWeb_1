@@ -62,12 +62,18 @@ public class FreeBoardModel {
 		FreeBoardDAO.boardInsert(vo);
 		return "redirect:../freeboard/list.do";
 	}
-	
+	//상세보기
 	@RequestMapping("freeboard/detail.do")
 	public String freeboard_detail(HttpServletRequest request, HttpServletResponse response) {
 		String no = request.getParameter("no");
 		FreeBoardVO vo =  FreeBoardDAO.boardDetailData(Integer.parseInt(no));
 		
+		//댓글 읽기
+		ReplyVO rvo = new ReplyVO();
+		rvo.setBno(vo.getNo());
+		rvo.setType(1);
+		List<ReplyVO> list = ReplyDAO.replyListData(rvo);
+		request.setAttribute("list", list);
 		request.setAttribute("vo", vo);
 		request.setAttribute("main_jsp", "../freeboard/detail.jsp");
 		return "../main/main.jsp";
