@@ -56,20 +56,87 @@ public class MemberDAO {
 		return count;
 	}
 	//전화번호 중복체크
-		public static int memberTelCheck(String tel) {
-			int count = 0;
-			SqlSession session = null;
-			try {
-				session = ssf.openSession();
-				count = session.selectOne("memberTelCheck", tel);
-			} catch (Exception e) {
-				System.out.println("DAO memberTelCheck error");
-				e.printStackTrace();
-			} finally {
-				if(session != null) {
-					session.close();
+	public static int memberTelCheck(String tel) {
+		int count = 0;
+		SqlSession session = null;
+		try {
+			session = ssf.openSession();
+			count = session.selectOne("memberTelCheck", tel);
+		} catch (Exception e) {
+			System.out.println("DAO memberTelCheck error");
+			e.printStackTrace();
+		} finally {
+			if(session != null) {
+				session.close();
+			}
+		}
+		return count;
+	}
+	
+/*
+ID       NOT NULL VARCHAR2(20)  
+PWD      NOT NULL VARCHAR2(10)  
+NAME     NOT NULL VARCHAR2(34)  
+SEX               VARCHAR2(10)  
+BIRTHDAY NOT NULL VARCHAR2(30)  
+EMAIL             VARCHAR2(100) 
+POST     NOT NULL VARCHAR2(20)  
+ADDR1    NOT NULL VARCHAR2(200) 
+ADDR2             VARCHAR2(200) 
+TEL               VARCHAR2(30)  
+CONTENT           CLOB          
+ADMIN             CHAR(1)       
+LOGIN             CHAR(1)       
+*/
+	//회원가입 <select id="memberInsert" parameterType="MemberVO">
+	public static void memberInsert (MemberVO vo) {
+		SqlSession session = null;
+		try {
+			session = ssf.openSession(true); // AutoCommit
+			session.insert("memberInsert", vo);
+		} catch (Exception e) {
+			System.out.println("DAO memberTelCheck error");
+			e.printStackTrace();
+		} finally {
+			if(session != null) {
+				session.close();
+			}
+		}
+	}
+	/*
+	 * <!-- 아이디 중복체크 -->
+	<select id="memberIdCount" resultType="int" parameterType="String">
+		SELECT COUNT(*) FROM project_member WHERE id=#{id}
+	</select>
+		<!-- 비밀번호 확인 -->
+	<select id="memberInfoData" resultType="MemberVO" parameterType="String">
+		SELECT id, pwd, name, admin FROM project_member
+		WHERE id=#{id}
+	</select>
+	 */
+	public static MemberVO isLogin(String id, String pwd) {
+		MemberVO vo = new MemberVO();
+		SqlSession session = null;
+		try {
+			session = ssf.openSession();
+			int count = session.selectOne("memberIdCount", id);
+			if(count==0) {
+				vo.setMsg("NOID");
+			} else {
+				vo = session.selectOne("memberInfoData", id);
+				if(pwd.equals(vo.getPwd())) { // 로그인
+					vo.setMsg("OK");
+				} else { // 비밀번호 틀린 상태
+					vo.setMsg("NOPWD");
 				}
 			}
-			return count;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(session != null) {
+				session.close();
+			}
 		}
+		return vo;
+	}
 }

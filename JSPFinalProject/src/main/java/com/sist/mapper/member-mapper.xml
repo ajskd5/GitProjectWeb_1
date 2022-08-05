@@ -16,20 +16,48 @@
 		=> id로 찾기 => 메일전송?
 	6. 회원 탈퇴
 -->
+	<!-- 1. 회원가입 -->
 	<!-- 아이디 중복체크 -->
 	<select id="memberIdCheck" resultType="int" parameterType="String">
 		SELECT COUNT(*) FROM project_member WHERE id=#{id}
 	</select>
-	
 	<!-- email 중복체크 -->
 	<select id="memberEmailCheck" resultType="int" parameterType="String">
 		SELECT COUNT(*) FROM project_member WHERE email=#{email}
 	</select>
-	
 	<!-- 전화번호 중복체크 -->
 	<select id="memberTelCheck" resultType="int" parameterType="String">
 		SELECT COUNT(*) FROM project_member WHERE tel=#{tel}
 	</select>
 	
+<!-- 회원 가입
+ID       NOT NULL VARCHAR2(20)  
+PWD      NOT NULL VARCHAR2(10)  
+NAME     NOT NULL VARCHAR2(34)  
+SEX               VARCHAR2(10)  
+BIRTHDAY NOT NULL VARCHAR2(30)  
+EMAIL             VARCHAR2(100) 
+POST     NOT NULL VARCHAR2(20)  
+ADDR1    NOT NULL VARCHAR2(200) 
+ADDR2             VARCHAR2(200) 
+TEL               VARCHAR2(30)  
+CONTENT           CLOB          
+ADMIN             CHAR(1)       
+LOGIN             CHAR(1)       
+-->
+	<select id="memberInsert" parameterType="MemberVO">
+		INSERT INTO project_member(id, pwd, name, sex, birthday, email, post, addr1, addr2, tel, content)
+		VALUES( #{id}, #{pwd}, #{name}, #{sex}, #{birthday}, #{email}, #{post}, #{addr1}, #{addr2}, #{tel}, #{content})
+	</select>
 	
+	<!-- 로그인 -->
+		<!-- 아이디 중복체크 -->
+	<select id="memberIdCount" resultType="int" parameterType="String">
+		SELECT COUNT(*) FROM project_member WHERE id=#{id}
+	</select>
+		<!-- 비밀번호 확인 -->
+	<select id="memberInfoData" resultType="MemberVO" parameterType="String">
+		SELECT id, pwd, name, admin FROM project_member
+		WHERE id=#{id}
+	</select>
 </mapper>

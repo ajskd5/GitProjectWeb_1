@@ -35,11 +35,6 @@ $(function(){
 		}).open()
 	})
 	
-	//회원가입 버튼 유효성 검사
-	$('#joinBtn').click(function(){
-		
-	})
-	
 	// 이메일 중복체크
 	$('#eBtn').click(function(){
 		let email = $('#email').val();
@@ -56,7 +51,7 @@ $(function(){
 				let count = parseInt(result.trim());
 				if(count==0){
 					$('#ePrint').text("사용가능한 이메일입니다!");
-					$('#email').attr('disabled', true);
+					$('#email').attr('readonly', true);
 				} else {
 					$('#ePrint').text("사용중인 이메일입니다!");
 					$('#email').val("");
@@ -81,13 +76,19 @@ $(function(){
 				let count = parseInt(result.trim());
 				if(count==0){
 					$('#tPrint').text("사용가능한 전화번호입니다!");
-					$('#tel2').attr('disabled', true);
+					$('#tel2').attr('readonly', true);
 				} else {
 					$('#tPrint').text("사용중인 전화번호입니다!");
 					$('#tel2').val("").focus();
 				}
 			}
 		})
+	})
+		
+	//회원가입 버튼 유효성 검사
+	// form전송
+	$('#joinBtn').click(function(){
+		$('#join_frm').submit();
 	})
 })
 </script>
