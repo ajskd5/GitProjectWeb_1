@@ -206,7 +206,7 @@ public class MainClass {
 							vo.setPoster("https://www.campingon.co.kr" + poster.attr("src"));
 							vo.setPrice(price);
 							vo.setImgs(img);
-//							dao.goodsInsert(vo);
+							dao.goodsInsert(vo);
 							System.out.println("===========================================");
 							
 						}
