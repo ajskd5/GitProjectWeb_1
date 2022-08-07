@@ -107,7 +107,7 @@ public class CampDAO {
 		try {
 			getConnection();
 			String sql = "INSERT INTO camp_1 "
-					+ "VALUES((SELECT NVL(MAX(no)+1, 1) FROM camp_1), "
+					+ "VALUES((SELECT NVL(MAX(c_no)+1, 1) FROM camp_1), "
 					+ "?, ?, ?, ?, ?, ?, ?, ?)";
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, vo.getTitle());

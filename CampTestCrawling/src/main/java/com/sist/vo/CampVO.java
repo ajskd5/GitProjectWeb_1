@@ -1,21 +1,5 @@
 package com.sist.vo;
-/*
-NO             NUMBER         
-TITLE          VARCHAR2(500)  
-POSTER         VARCHAR2(2000) 
-ADDR           VARCHAR2(500)  
-TEL            VARCHAR2(100)  
-ENVIRONMENT    VARCHAR2(1000) 
-TYPE           VARCHAR2(1000) 
-M_PERIOD       VARCHAR2(500)  
-M_DAY          VARCHAR2(500)  
-LINK           VARCHAR2(2000) 
-IMGS           CLOB           
-CONTENT        CLOB           
-INFO           CLOB           
-GALLERY        CLOB           
 
- */
 public class CampVO {
 	private int no;
 	private String title, poster, info, imgs, content, info2, etcinfo, gallery;

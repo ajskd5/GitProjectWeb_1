@@ -42,9 +42,9 @@ public class MainClass {
 			CampDAO dao = new CampDAO();
 			List<CampLinkVO> list = dao.linkList();
 			CampVO vo2 = new CampVO();
+			int z = 1;
 			for(CampLinkVO vo : list) {
 				try {
-					int z = 1;
 					Document doc = Jsoup.connect("https://www.gocamping.or.kr"+vo.getLink()).get();
 //					Document doc = Jsoup.connect("https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=1776&viewType=read01&listOrdrTrget=c_rdcnt").get();
 					Elements title = doc.select("p.camp_name");
@@ -91,8 +91,8 @@ public class MainClass {
 					vo2.setGallery(gal);
 					
 					dao.campInsert(vo2);
-					z++;
 					System.out.println(z);
+					z++;
 				} catch (Exception e) {
 					System.out.println("try~catch 안에서 오류");
 					e.printStackTrace();
@@ -171,40 +171,49 @@ public class MainClass {
 					break;
 				}
 				System.out.println("카테고리번호 : " + i);
-				for(a=1; a<=count; a++) {
-					//https://www.campingon.co.kr/goods/goods_list.php?page=1&cateCd=093001
-					Document doc = Jsoup.connect("https://www.campingon.co.kr/goods/goods_list.php?page="+a+"&cateCd=09300"+i).get();
-					System.out.println(a + "페이지 / 총페이지 : " + count);
-					
-					Elements list = doc.select("div.item_photo_box a"); // 상품 링크
-					for(int j=0; j<list.size(); j++) {
-						Document doc2 = Jsoup.connect("https://www.campingon.co.kr"+list.get(j).attr("href").substring(2)).get();
-						System.out.println(j);
-						Elements imgs = doc2.select("div.txt-manual img"); // src
-						Elements title = doc2.select("div.item_detail_tit h3");
-						Element poster = doc2.selectFirst("span.img_photo_big img"); // src 이미지 |로 구분
-						System.out.println(category);
-						System.out.println(title.text());
-						String img = "";
-						for(int k=0; k<imgs.size(); k++) {
-//							System.out.println(poster.get(k).attr("src"));
-							img = img + "https://www.campingon.co.kr" +imgs.get(k).attr("src")+"^";
+				try {
+					for(a=1; a<=count; a++) {
+						//https://www.campingon.co.kr/goods/goods_list.php?page=1&cateCd=093001
+						Document doc = Jsoup.connect("https://www.campingon.co.kr/goods/goods_list.php?page="+a+"&cateCd=09300"+i).get();
+						System.out.println(a + "페이지 / 총페이지 : " + count);
+						
+						Elements list = doc.select("div.item_photo_box a"); // 상품 링크
+						try {
+							
+						} catch (Exception e) {
+							// TODO: handle exception
 						}
-						System.out.println("poster : "+ "https://www.campingon.co.kr" + poster.attr("src"));
-						System.out.println("img : " + img);
-						int price = (int) (Math.random()*9 + 1)*100;
-						System.out.println("가격 : "+ price);
-						
-						vo.setType(category);
-						vo.setTitle(title.text());
-						vo.setPoster("https://www.campingon.co.kr" + poster.attr("src"));
-						vo.setPrice(price);
-						vo.setImgs(img);
-						dao.goodsInsert(vo);
-						System.out.println("===========================================");
-						
+						for(int j=0; j<list.size(); j++) {
+							Document doc2 = Jsoup.connect("https://www.campingon.co.kr"+list.get(j).attr("href").substring(2)).get();
+							System.out.println(j);
+							Elements imgs = doc2.select("div.txt-manual img"); // src
+							Elements title = doc2.select("div.item_detail_tit h3");
+							Element poster = doc2.selectFirst("span.img_photo_big img"); // src 이미지 |로 구분
+							System.out.println(category);
+							System.out.println(title.text());
+							String img = "";
+							for(int k=0; k<imgs.size(); k++) {
+//								System.out.println(poster.get(k).attr("src"));
+								img = img + "https://www.campingon.co.kr" +imgs.get(k).attr("src")+"^";
+							}
+							System.out.println("poster : "+ "https://www.campingon.co.kr" + poster.attr("src"));
+							System.out.println("img : " + img);
+							int price = (int) (Math.random()*9 + 1)*100;
+							System.out.println("가격 : "+ price);
+							
+							vo.setType(category);
+							vo.setTitle(title.text());
+							vo.setPoster("https://www.campingon.co.kr" + poster.attr("src"));
+							vo.setPrice(price);
+							vo.setImgs(img);
+//							dao.goodsInsert(vo);
+							System.out.println("===========================================");
+							
+						}
+						System.out.println("상품 20개 끝");
 					}
-					System.out.println("상품 20개 끝");
+				} catch (Exception e) {
+					// TODO: handle exception
 				}
 				System.out.println("다음 카테고리");
 			}
@@ -215,6 +224,7 @@ public class MainClass {
 	}
 	public static void main(String[] args) {
 		MainClass m = new MainClass();
+//		m.linkData();
 //		m.campDetail();
 		m.asdf();
 	}
