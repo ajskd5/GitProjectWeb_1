@@ -60,6 +60,7 @@ public class BoardReplyModel {
 		String subject = request.getParameter("subject");
 		String content = request.getParameter("content");
 		String pwd = request.getParameter("pwd");
+		String pno = request.getParameter("pno");
 		
 		BoardReplyVO vo = new BoardReplyVO();
 		vo.setName(name);
@@ -67,7 +68,7 @@ public class BoardReplyModel {
 		vo.setContent(content);
 		vo.setPwd(pwd);
 		
-		BoardReplyDAO.boardReplyInsert(vo);
+		BoardReplyDAO.boardReplyInsertOk(Integer.parseInt(pno),vo);
 		
 		return "redirect:../board_reply/list.do";
 	}

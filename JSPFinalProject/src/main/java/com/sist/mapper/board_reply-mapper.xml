@@ -34,5 +34,42 @@
 		(SELECT NVL(MAX(group_id)+1, +1) FROM project_replyBoard)) 
 	</insert>
 	
-	<!-- 답변 달기(관리자) -->
+	<!-- 답변 달기(관리자) 답변이 안달린 게시글만 가져옴(답변 달려고)-->
+	<select id="boardReplyAdminData" resultType="BoardReplyVO">
+		SELECT * FROM project_replyBoard
+		WHERE isreply!=1 AND group_step!=1
+		ORDER BY no DESC
+	</select>
+	<!-- 게시물 내용보기 (일반 유저, 관리자 동일)-->
+		<!-- 조회수 증가 -->
+	<update id="boardReplyHitIncrement" parameterType="int">
+		UPDATE project_replyBoard SET
+		hit = hit + 1
+		WHERE no = #{no}
+	</update>
+	<select id="boardReplyDetailData" resultType="BoardReplyVO" parameterType="int">
+		SELECT no, name, subject, content, hit, TO_CHAR(regdate, 'YYYY-MM-DD') as dbday, group_id
+		FROM project_replyBoard
+		WHERE no = #{no}
+	</select>
+	
+	<!-- 관리자가 답변달기 그룹id가져오기, ?, 답글달면 게시글 isReply에 1로 수정-->
+	<select id="boardReplyInfoData" resultType="int" parameterType="int">
+    	SELECT group_id FROM project_replyBoard 
+    	WHERE no=#{no}
+  	</select>
+  	<insert id="boardReplyInsertOk" parameterType="BoardReplyVO">
+    	<selectKey keyProperty="no" resultType="int" order="BEFORE">
+      		SELECT NVL(MAX(no)+1,1) as no FROM project_replyBoard
+    	</selectKey>
+    	INSERT INTO project_replyBoard(no,name,subject,content,pwd,group_id,group_step,group_tab)
+    	VALUES(#{no},#{name},#{subject},#{content},#{pwd},
+     	#{group_id},1,1)
+  	</insert>
+  	<update id="boardReplyIsReply" parameterType="int">
+    	UPDATE project_replyBoard SET
+   		isreply=1
+    	WHERE no=#{no}
+  	</update>
+	
 </mapper>
