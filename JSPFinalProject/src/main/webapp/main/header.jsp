@@ -93,16 +93,16 @@
       <li><a class="drop" href="#">커뮤니티</a>
         <ul>
           <li><a href="../freeboard/list.do">자유게시판</a></li>
-          <li><a href="pages/full-width.html">묻고 답하기</a></li>
+          <li><a href="../board_reply/list.do">묻고 답하기</a></li>
           <li><a href="pages/sidebar-left.html">공지사항</a></li>
         </ul>
       </li>
       <c:if test="${sessionScope.id!=null }">
         <c:if test="${sessionScope.admin=='n' }">
-          <li><a href="#">마이페이지</a></li>
+          <li><a href="../mypage/mypage.do">마이페이지</a></li>
         </c:if>
         <c:if test="${sessionScope.admin=='y' }">
-          <li><a href="#">관리자페이지</a></li>
+          <li><a href="../adminpage/adminpage.do">관리자페이지</a></li>
         </c:if>
       </c:if>
     </ul>

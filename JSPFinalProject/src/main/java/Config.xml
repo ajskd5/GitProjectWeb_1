@@ -14,6 +14,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.sist.vo.FreeBoardVO" alias="FreeBoardVO"/>
 		<typeAlias type="com.sist.vo.MemberVO" alias="MemberVO"/>
 		<typeAlias type="com.sist.vo.ReplyVO" alias="ReplyVO"/>
+		<typeAlias type="com.sist.vo.BoardReplyVO" alias="BoardReplyVO"/>
 	
 	</typeAliases>
 	<environments default="development">
@@ -34,6 +35,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="com/sist/mapper/freeboard-mapper.xml"/>
 		<mapper resource="com/sist/mapper/member-mapper.xml"/>
 		<mapper resource="com/sist/mapper/reply-mapper.xml"/>
+		<mapper resource="com/sist/mapper/board_reply-mapper.xml"/>
 		
 	</mappers>
 </configuration>
