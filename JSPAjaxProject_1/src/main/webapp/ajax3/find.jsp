@@ -29,6 +29,7 @@ $(function(){
 			url:'find_ok.jsp',
 			data:{"fd":fd},
 			success:function(result){
+				alert(result);
 				$('.print').html(result);
 			}
 		})

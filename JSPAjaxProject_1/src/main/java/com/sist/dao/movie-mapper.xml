@@ -23,10 +23,18 @@
 		< => &lt;
 		> => &gt;
 	 -->
+	 <!-- 영화검색 -->
 	<select id="movieFindData" resultType="com.sist.dao.MovieVO" parameterType="String">
 		SELECT mno, title, poster, rownum
 		FROM project_movie
 		WHERE rownum &lt;= 12
 		AND title LIKE '%'||#{title}||'%' 
+	</select>
+	
+	<!-- ? -->
+	<select id="movieSearchData" resultType="com.sist.dao.MovieVO">
+		SELECT mno, title, poster, genre, director
+		FROM project_movie
+		ORDER BY mno ASC 
 	</select>
 </mapper>

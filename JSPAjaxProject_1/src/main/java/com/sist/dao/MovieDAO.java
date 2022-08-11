@@ -68,4 +68,14 @@ public class MovieDAO {
 		session.close();
 		return list;
 	}
+	
+	
+	//<select id="movieSearchData" resultType="com.sist.dao.MovieVO">
+	public static List<MovieVO> movieSearchData() {
+		List<MovieVO> list = null;
+		SqlSession session = ssf.openSession();
+		list = session.selectList("movieSearchData");
+		session.close();
+		return list;
+	}
 }
