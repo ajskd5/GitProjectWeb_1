@@ -1,8 +1,21 @@
 package com.sist.vo;
 
 public class CampVO {
-	private int no;
-	private String title, poster, info, imgs, content, info2, etcinfo, gallery;
+	private int no, hit;
+	private String title, poster, info, imgs, content, info2, etcinfo, gallery, addr;
+	
+	public int getHit() {
+		return hit;
+	}
+	public void setHit(int hit) {
+		this.hit = hit;
+	}
+	public String getAddr() {
+		return addr;
+	}
+	public void setAddr(String addr) {
+		this.addr = addr;
+	}
 	public int getNo() {
 		return no;
 	}

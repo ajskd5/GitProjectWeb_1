@@ -2,7 +2,14 @@ package com.sist.vo;
 
 public class CampLinkVO {
 	private int no;
-	private String link, title;
+	private String link, title, addr;
+	
+	public String getAddr() {
+		return addr;
+	}
+	public void setAddr(String addr) {
+		this.addr = addr;
+	}
 	public int getNo() {
 		return no;
 	}

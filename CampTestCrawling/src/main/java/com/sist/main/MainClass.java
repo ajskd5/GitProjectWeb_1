@@ -19,14 +19,19 @@ public class MainClass {
 			for(int k=1; k<=321; k++) {
 				Document doc = Jsoup.connect("https://www.gocamping.or.kr/bsite/camp/info/list.do?pageUnit=10&searchKrwd=&listOrdrTrget=last_updusr_pnttm&pageIndex=" + k).get();
 				Elements link = doc.select("div.c_list h2.camp_tt a");
+				Elements addr = doc.select("li.addr");
 				for(int i=0; i<link.size(); i++) {
 					CampLinkVO vo = new CampLinkVO();
 					System.out.println("link : " + link.get(i).attr("href"));
 					System.out.println("title : " + link.get(i).text());
+					System.out.println("addr : " + addr.get(i).text());
 					vo.setLink(link.get(i).attr("href"));
 					vo.setTitle(link.get(i).text());
+					vo.setAddr(addr.get(i).text());
 					System.out.println();
 					dao.linkInsert(vo);
+					System.out.println(a);
+					a++;
 				}
 				
 			}
@@ -63,14 +68,18 @@ public class MainClass {
 
 					String img = "";
 					for(int j=0; j<imgs.size(); j++) {
-						img = img + "https://gocamping.or.kr" +imgs.attr("src") + "^";
+						img = img + "https://gocamping.or.kr" +imgs.get(j).attr("src") + "^";
 					}
 
 
 					String gal = "";
 					for(int i=0; i<gallery.size(); i++) {
-						gal = gal + gallery.attr("src") + "^";
+						gal = gal + gallery.get(i).attr("src") + "^";
 					}
+					
+					int hit = (int)(Math.random()*10)+1;
+					
+					String addr = vo.getAddr();
 					System.out.println(title.text());
 					System.out.println("https://gocamping.or.kr" + poster.attr("src"));
 					System.out.println(info);
@@ -89,7 +98,8 @@ public class MainClass {
 					vo2.setInfo2(info2.text());
 					vo2.setEtcinfo(etcinfo);
 					vo2.setGallery(gal);
-					
+					vo2.setHit(hit);
+					vo2.setAddr(addr);
 					dao.campInsert(vo2);
 					System.out.println(z);
 					z++;
@@ -206,7 +216,7 @@ public class MainClass {
 							vo.setPoster("https://www.campingon.co.kr" + poster.attr("src"));
 							vo.setPrice(price);
 							vo.setImgs(img);
-							dao.goodsInsert(vo);
+//							dao.goodsInsert(vo);
 							System.out.println("===========================================");
 							
 						}
@@ -225,8 +235,8 @@ public class MainClass {
 	public static void main(String[] args) {
 		MainClass m = new MainClass();
 //		m.linkData();
-//		m.campDetail();
-		m.asdf();
+		m.campDetail();
+//		m.asdf();
 	}
 
 }

@@ -66,10 +66,11 @@ public class CampDAO {
 			getConnection();
 			String sql = "INSERT INTO camplink_1 "
 					+ "VALUES((SELECT NVL(MAX(no)+1, 1) FROM camplink_1), "
-					+ "?, ?)";
+					+ "?, ?, ?)";
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, vo.getLink());
 			ps.setString(2, vo.getTitle());
+			ps.setString(3, vo.getAddr());
 			ps.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -82,7 +83,7 @@ public class CampDAO {
 		List<CampLinkVO> list = new ArrayList<CampLinkVO>();
 		try {
 			getConnection();
-			String sql = "SELECT no, link, title "
+			String sql = "SELECT no, link, title, addr "
 					+ "FROM camplink_1 "
 					+ "ORDER BY no";
 			ps = conn.prepareStatement(sql);
@@ -92,6 +93,7 @@ public class CampDAO {
 				vo.setNo(rs.getInt(1));
 				vo.setLink(rs.getString(2));
 				vo.setTitle(rs.getString(3));
+				vo.setAddr(rs.getString(4));
 				list.add(vo);
 			}
 			rs.close();
@@ -107,8 +109,8 @@ public class CampDAO {
 		try {
 			getConnection();
 			String sql = "INSERT INTO camp_1 "
-					+ "VALUES((SELECT NVL(MAX(c_no)+1, 1) FROM camp_1), "
-					+ "?, ?, ?, ?, ?, ?, ?, ?)";
+					+ "VALUES((SELECT NVL(MAX(no)+1, 1) FROM camp_1), "
+					+ "?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, vo.getTitle());
 			ps.setString(2, vo.getPoster());
@@ -118,6 +120,8 @@ public class CampDAO {
 			ps.setString(6, vo.getInfo2());
 			ps.setString(7, vo.getEtcinfo());
 			ps.setString(8, vo.getGallery());
+			ps.setInt(9, vo.getHit());
+			ps.setString(10, vo.getAddr());
 			ps.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
