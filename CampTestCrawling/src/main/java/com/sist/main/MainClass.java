@@ -233,10 +233,16 @@ public class MainClass {
 		}
 	}
 	public static void main(String[] args) {
-		MainClass m = new MainClass();
+//		MainClass m = new MainClass();
 //		m.linkData();
-		m.campDetail();
+//		m.campDetail();
 //		m.asdf();
+		
+		String a = "asldkfjasldfjasldkfj^";
+		String b = "asld";
+		a = a.substring(0, a.lastIndexOf("j"));
+		System.out.println(a);
+		
 	}
 
 }
