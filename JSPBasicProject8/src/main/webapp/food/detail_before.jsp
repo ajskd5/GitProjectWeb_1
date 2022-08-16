@@ -6,7 +6,7 @@
 	Cookie cookie = new Cookie("f" + fno, fno);
 	cookie.setPath("/");
 	cookie.setMaxAge(60*60*24);
-	response.addCookie(cookie);
+	response.addCookie(cookie);	
 	
 	//이동
 	response.sendRedirect("food_detail.jsp?no=" + fno);

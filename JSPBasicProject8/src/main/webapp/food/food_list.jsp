@@ -49,12 +49,12 @@
 	if(cookies != null){
 		// 최신 페이지 => 마지막번째 링크부터 출력
 		for(int i=cookies.length-1; i>=0; i--){
-	if(cookies[i].getName().startsWith("f")){
-		// f부터 시작 (detail_before에서 "f" + fno로 줘서 f부터 시작)
-		String no = cookies[i].getValue();
-		FoodVO vo = dao.foodDetailData(Integer.parseInt(no));
-		cList.add(vo);
-	}
+			if(cookies[i].getName().startsWith("f")){
+				// f부터 시작 (detail_before에서 "f" + fno로 줘서 f부터 시작)
+				String no = cookies[i].getValue();
+				FoodVO vo = dao.foodDetailData(Integer.parseInt(no));
+				cList.add(vo);
+			}
 		}
 	}
 %>
