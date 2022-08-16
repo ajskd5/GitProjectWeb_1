@@ -139,4 +139,25 @@ LOGIN             CHAR(1)
 		}
 		return vo;
 	}
+	
+	// =====================================================================================
+	// 회원수정
+	// 정보가져오기
+	//<select id="memberDetailData" resultType="MemberVO" parameterType="String">
+	public static MemberVO memberDetailData(String id) {
+		MemberVO vo = new MemberVO();
+		SqlSession session = null;
+		try {
+			session = ssf.openSession();
+			vo = session.selectOne("memberDetailData", id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}  finally {
+			if(session != null) {
+				session.close();
+			}
+		}
+		return vo;
+	}
+	
 }

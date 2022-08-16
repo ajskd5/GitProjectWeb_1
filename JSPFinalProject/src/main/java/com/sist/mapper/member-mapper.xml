@@ -60,4 +60,18 @@ LOGIN             CHAR(1)
 		SELECT id, pwd, name, admin FROM project_member
 		WHERE id=#{id}
 	</select>
+	
+	<!-- 회원수정 -->
+	<!-- 회원 정보 읽기 -->
+	<select id="memberDetailData" resultType="MemberVO" parameterType="String">
+		SELECT * FROM project_member
+		WHERE id=#{id}
+	</select>
+	<!-- 회원 수정 -->
+		<!-- session 처리 해야함 (안하면 이전꺼 그대로 session에 저장되어 있음) -->
+	<update id="memberUpdate" parameterType="MemberVO">
+		UPDATE project_member SET
+		name=#{name}, sex=#{sex}, email=#{email}, post=#{post}, addr1=#{addr1}, addr2=#{addr2}, tel=#{tel}, content=#{content}
+		WHERE id=#{id}
+	</update>
 </mapper>

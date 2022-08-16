@@ -37,21 +37,15 @@
     <!-- ################################################################################################ -->
     <ul class="clear">
       <li class="active"><a href="../main/main.do">Home</a></li>
-      <li><a class="drop" href="#">회원</a>
         <c:if test="${sessionScope.id==null}">
+        <li><a class="drop" href="#">회원</a>
           <ul>
             <li><a href="../member/join.do">회원가입</a></li>
             <li><a href="pages/gallery.html">아이디 찾기</a></li>
             <li><a href="pages/full-width.html">비밀번호 찾기</a></li>
           </ul>
+         </li>
         </c:if>
-        <c:if test="${sessionScope.id!=null}">
-          <ul>
-            <li><a href="../member/join.do">회원수정</a></li>
-            <li><a href="pages/gallery.html">회원 탈퇴</a></li>
-          </ul>
-        </c:if>
-      </li>
      <li><a class="drop" href="#">맛집</a>
         <ul>
           <li><a href="../food/food_find.do">지역별 맛집</a></li>
