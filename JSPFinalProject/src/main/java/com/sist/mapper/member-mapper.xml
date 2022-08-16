@@ -74,4 +74,10 @@ LOGIN             CHAR(1)
 		name=#{name}, sex=#{sex}, email=#{email}, post=#{post}, addr1=#{addr1}, addr2=#{addr2}, tel=#{tel}, content=#{content}
 		WHERE id=#{id}
 	</update>
+	<!-- 회원 탈퇴 -->
+	<delete id="memberDelete" parameterType="String">
+		DELETE FROM project_member
+		WHERE id=#{id}
+	</delete>
+	
 </mapper>

@@ -160,4 +160,55 @@ LOGIN             CHAR(1)
 		return vo;
 	}
 	
+	// 정보 수정
+	// <update id="memberUpdate" parameterType="MemberVO">
+	public static boolean memberUpdate(MemberVO vo) {
+		boolean bCheck = false;
+		SqlSession session = null;
+		try {
+			session = ssf.openSession();
+			// 비밀번호 확인
+			MemberVO pvo = session.selectOne("memberInfoData", vo.getId());
+			if(pvo.getPwd().equals(vo.getPwd())) {
+				bCheck=true;
+				session.update("memberUpdate", vo);
+				session.commit();
+			} else {
+				bCheck=false;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(session != null) {
+				session.close();
+			}
+		}
+		return bCheck;
+	}
+	
+	// 회원 탈퇴
+	//<delete id="memberDelete" parameterType="String">
+	public static boolean memberDelete(String id, String pwd) {
+		boolean bCheck = false;
+		SqlSession session = null;
+		try {
+			session = ssf.openSession();
+			// 비밀번호 확인
+			MemberVO pvo = session.selectOne("memberInfoData", id);
+			if(pvo.getPwd().equals(pwd)) {
+				bCheck=true;
+				session.delete("memberDelete", id);
+				session.commit();
+			} else {
+				bCheck=false;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(session != null) {
+				session.close();
+			}
+		}
+		return bCheck;
+	}
 }

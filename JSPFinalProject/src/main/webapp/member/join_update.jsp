@@ -81,67 +81,65 @@ $(function(){
 
 </head>
 <body>
-  <div class="wrapper row3 row">
-   <main class="container clear">
    <h2 class="sectiontitle">회원수정</h2>
    <form method="post" action="../member/join_update_ok.do" name="join_frm" id="join_frm">
     <table class="table">
       <tr>
-       <th class="text-right" width=15%>아이디</th>
-       <td width=85% class="inline">
+       <th class="text-right" width=25%>아이디</th>
+       <td width=75% class="inline">
          <input type=text name=id id="join_id" size=30 class="input-sm" readonly value="${vo.id }">
        </td>
       </tr>
       <tr>
-       <th class="text-right" width=15%>비밀번호</th>
-       <td width=85% class="inline">
+       <th class="text-right" width=25%>비밀번호</th>
+       <td width=75% class="inline">
          <input type=password name=pwd id=join_pwd size=30 class="input-sm">
        </td>
       </tr>
       <tr>
-       <th class="text-right" width=15%>이름</th>
-       <td width=85%>
+       <th class="text-right" width=25%>이름</th>
+       <td width=75%>
          <input type=text name=name id=name size=30 class="input-sm" value="${vo.name }">
        </td>
       </tr>
       <tr>
-       <th class="text-right" width=15%>성별</th>
-       <td width=85% class="inline">
+       <th class="text-right" width=25%>성별</th>
+       <td width=75% class="inline">
          <input type=radio value="남자" name=sex ${vo.sex=='남자'?"checked":"" }>남자
          <input type=radio value="남자" name=sex ${vo.sex=='여자'?"checked":"" }>여자
        </td>
       </tr>
       <tr>
-       <th class="text-right" width=15%>이메일</th>
-       <td width=85% class="inline">
+       <th class="text-right" width=25%>이메일</th>
+       <td width=75% class="inline">
          <input type=text name=email id=email size=70 class="input-sm" value="${vo.email }">
          <input type="button" id="eBtn" class="btn btn-sm btn-success" value="이메일 확인">
          &nbsp;<span style="color: blue" id="ePrint"></span>
        </td>
       </tr>
       <tr>
-       <th class="text-right" width=15%>우편번호</th>
-       <td width=85% class='inline'>
+       <th class="text-right" width=25%>우편번호</th>
+       <td width=75% class='inline'>
          <input type=text name=post id=post size=30 class="input-sm" readonly value="${vo.post }">
          <input type=button id="postBtn" value="우편번호찾기"
           class="btn btn-sm btn-danger">
        </td>
       </tr>
       <tr>
-       <th class="text-right" width=15%>주소</th>
-       <td width=85%>
+       <th class="text-right" width=25%>주소</th>
+       <td width=75%>
          <input type=text name=addr1 id=addr1 size=95 class="input-sm" readonly value="${vo.addr1 }">
        </td>
       </tr>
       <tr>
-       <th class="text-right" width=15%>상세주소</th>
-       <td width=85%>
+       <th class="text-right" width=25%>상세주소</th>
+       <td width=75%>
          <input type=text name=addr2 id=addr2 size=95 class="input-sm" value="${vo.addr2 }">
        </td>
       </tr>
       <tr>
-       <th class="text-right" width=15%>전화번호</th>
-       <td width=85% class="inline">
+       <th class="text-right" width=25%>전화번호</th>
+       <td width=75% class="inline">
          <input type=text name=tel1 id=tel1 size=15 class="input-sm" value="010">
          <input type=text name=tel2 id=tel2 size=30 class="input-sm" value="${vo.tel }">
          <input type="button" id="tBtn" class="btn btn-sm btn-info" value="전화번호 확인">
@@ -149,8 +147,8 @@ $(function(){
        </td>
       </tr>
       <tr>
-       <th class="text-right" width=15%>소개</th>
-       <td width=85%>
+       <th class="text-right" width=25%>소개</th>
+       <td width=75%>
          <textarea rows="10" cols="100" id="content" name="content">${vo.content }</textarea>
        </td>
       </tr>
@@ -162,7 +160,5 @@ $(function(){
       </tr>
     </table>
     </form>
-   </main>
-  </div>
 </body>
 </html>

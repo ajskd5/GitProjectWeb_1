@@ -72,9 +72,39 @@ public class MyPageModel {
 		vo.setContent(content);
 		
 		// 수정처리 (DAO연결)
-		
-		
+		boolean bCheck = MemberDAO.memberUpdate(vo);
+		if(bCheck == true) {
+			HttpSession session = request.getSession();
+			session.setAttribute("name", vo.getName());
+		}
+		request.setAttribute("bCheck", bCheck);
     	return "../member/join_update_ok.jsp";
-   }
-   
+    }
+
+    //회원탈퇴
+    @RequestMapping("member/join_delete.do")
+    public String member_join_delete(HttpServletRequest request,HttpServletResponse response) {
+    	
+    	request.setAttribute("mypage_jsp", "../member/join_delete.jsp");
+    	request.setAttribute("main_jsp", "../mypage/mypage.jsp");
+    	return "../main/main.jsp";
+    }
+    
+    @RequestMapping("member/join_delete_ok.do")
+    public String member_join_delete_ok(HttpServletRequest request,HttpServletResponse response) {
+    	// 경우의 수 2가지 => 비밀번호 O / X
+    	HttpSession session = request.getSession();
+    	String id = (String)session.getAttribute("id");
+    	String pwd = request.getParameter("pwd");
+    	
+    	// DAO 연동
+    	boolean bCheck = MemberDAO.memberDelete(id, pwd);
+    	if(bCheck == true) {
+    		session.invalidate();
+    	}
+    	request.setAttribute("bCheck", bCheck);
+    	return "../member/join_delete_ok.jsp";
+    }
+    
+    
 }
