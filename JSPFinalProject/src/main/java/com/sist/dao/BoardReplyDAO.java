@@ -150,4 +150,55 @@ public class BoardReplyDAO {
 			}
 		}	
 	}
+	
+	// 수정하기 (관리자X) 상세보기랑 같음(조회수 증가 제외)
+	public static BoardReplyVO boardReplyUpdateData(int no) {
+		SqlSession session = null;
+		BoardReplyVO vo = null;
+		try {
+			session = ssf.openSession();
+			vo = session.selectOne("boardReplyDetailData", no);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(session != null) {
+				session.close();
+			}
+		}	
+		return vo;
+	}
+	// 수정하기 버튼 클릭 <update id="boardReplyUpdate" parameterType="BoardReplyVO">
+	public static void boardReplyUpdate(BoardReplyVO vo) {
+		SqlSession session = null;
+		try {
+			session = ssf.openSession(true);
+			session.update("boardReplyUpdate", vo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(session != null) {
+				session.close();
+			}
+		}
+	}
+	
+	// 삭제하기
+	//<select id="boardGetGroupId" resultType="int" parameterType="int"> <delete id="boardReplyDelete" parameterType="int">
+	public static void boardReplyDelete(int no) {
+		SqlSession session = null;
+		try {
+			session = ssf.openSession(true);
+			int gi = session.selectOne("boardGetGroupId", no);
+			session.delete("boardReplyDelete", gi);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(session != null) {
+				session.close();
+			}
+		}
+	}
+	
+
+	
 }

@@ -87,7 +87,43 @@ public class BoardReplyModel {
 	@RequestMapping("board_reply/update.do")
 	public String board_reply_update(HttpServletRequest request, HttpServletResponse response) {
 		String no = request.getParameter("no");
+		BoardReplyVO vo = BoardReplyDAO.boardReplyUpdateData(Integer.parseInt(no));
+		request.setAttribute("vo", vo);
 		request.setAttribute("main_jsp", "../board_reply/update.jsp");
 		return "../main/main.jsp";
 	}
+	// 수정 확인 버튼 => 화면 출력이 아니라 요청처리만 함 => 이동할 페이지 재호출(redirect)
+	@RequestMapping("board_reply/update_ok.do")
+	public String board_reply_update_ok(HttpServletRequest request, HttpServletResponse response) {
+		try {
+			request.setCharacterEncoding("UTF-8");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		String name = request.getParameter("name");
+		String subject = request.getParameter("subject");
+		String content = request.getParameter("content");
+		String pwd = request.getParameter("pwd");
+		String no = request.getParameter("no");
+		
+		BoardReplyVO vo = new BoardReplyVO();
+		vo.setName(name);
+		vo.setSubject(subject);
+		vo.setContent(content);
+		vo.setPwd(pwd);
+		vo.setNo(Integer.parseInt(no));
+		
+		BoardReplyDAO.boardReplyUpdate(vo);
+		
+		return "redirect:../board_reply/detail.do?no=" + vo.getNo();
+	}
+	
+	// 삭제하기
+	@RequestMapping("board_reply/delete.do")
+	public String board_reply_delete(HttpServletRequest request, HttpServletResponse response) {
+		String no = request.getParameter("no");
+		BoardReplyDAO.boardReplyDelete(Integer.parseInt(no));
+		return "redirect:../board_reply/list.do";
+	}
+	
 }

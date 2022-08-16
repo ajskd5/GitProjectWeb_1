@@ -48,7 +48,7 @@
 		WHERE no = #{no}
 	</update>
 	<select id="boardReplyDetailData" resultType="BoardReplyVO" parameterType="int">
-		SELECT no, name, subject, content, hit, TO_CHAR(regdate, 'YYYY-MM-DD') as dbday, group_id, group_step
+		SELECT no, name, subject, content, hit, TO_CHAR(regdate, 'YYYY-MM-DD') as dbday, group_id, group_step, pwd
 		FROM project_replyBoard
 		WHERE no = #{no}
 	</select>
@@ -71,5 +71,22 @@
    		isreply=1
     	WHERE no=#{no}
   	</update>
+  	
+  	<!-- 게시글 수정하기 -->
+  	<update id="boardReplyUpdate" parameterType="BoardReplyVO">
+  		UPDATE project_replyBoard SET
+  		name=#{name}, subject=#{subject}, content=#{content}
+  		WHERE no=#{no}
+  	</update>
+  	
+  	<!-- 게시글 삭제 -->
+  	<select id="boardGetGroupId" resultType="int" parameterType="int">
+  		SELECT group_id FROM project_replyBoard
+  		WHERE no=#{no}
+  	</select>
+  	<delete id="boardReplyDelete" parameterType="int">
+  		DELETE FROM project_replyBoard
+  		WHERE group_id=#{group_id}
+  	</delete>
 	
 </mapper>
