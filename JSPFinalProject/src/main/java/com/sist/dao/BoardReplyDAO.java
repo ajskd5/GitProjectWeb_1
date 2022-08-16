@@ -97,6 +97,9 @@ public class BoardReplyDAO {
 		BoardReplyVO vo = null;
 		try {
 			session = ssf.openSession();
+			 // 일반 묻고답하기 상세보기 + 관리자 페이지에서 같이 씀 (관리자페이지에서는 조회수 증가X)
+			session.update("boardReplyHitIncrement", no); 
+			session.commit();
 			vo = session.selectOne("boardReplyDetailData", no);
 		} catch (Exception e) {
 			e.printStackTrace();

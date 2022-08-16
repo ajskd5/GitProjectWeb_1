@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,8 +51,10 @@
        </tr>
        <tr>
          <td colspan="4" class="text-right">
+         <c:if test="${vo.group_step != 1 }"><%-- 관리자 댓글은 제외 (1이면 관리자가 작성) --%>
            <a href="../board_reply/update.do?no=${vo.no }" class="btn btn-xs btn-danger">수정</a>
-           <span class="btn btn-xs btn-info" id="del">삭제</span>
+           <a href="../board_reply/delete.do?no=${vo.no }" class="btn btn-xs btn-info" id="del">삭제</a>
+         </c:if>
            <a href="../board_reply/list.do" class="btn btn-xs btn-warning">목록</a>
          </td>
        </tr>
@@ -62,6 +65,7 @@
          </td>
        </tr>
      </table>
+     </div>
     <div class="one_third">2/3</div>
   </main>
 </div>

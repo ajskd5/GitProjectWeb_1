@@ -72,4 +72,22 @@ public class BoardReplyModel {
 		
 		return "redirect:../board_reply/list.do";
 	}
+	
+	//상세보기
+	@RequestMapping("board_reply/detail.do")
+	public String board_reply_detail(HttpServletRequest request, HttpServletResponse response) {
+		String no = request.getParameter("no");
+		BoardReplyVO vo = BoardReplyDAO.boardReplyDetailData(Integer.parseInt(no));
+		request.setAttribute("vo", vo);
+		request.setAttribute("main_jsp", "../board_reply/detail.jsp");
+		return "../main/main.jsp";
+	}
+	
+	// 수정하기
+	@RequestMapping("board_reply/update.do")
+	public String board_reply_update(HttpServletRequest request, HttpServletResponse response) {
+		String no = request.getParameter("no");
+		request.setAttribute("main_jsp", "../board_reply/update.jsp");
+		return "../main/main.jsp";
+	}
 }
