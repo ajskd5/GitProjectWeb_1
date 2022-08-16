@@ -6,6 +6,8 @@ import com.sist.controller.RequestMapping;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import java.util.*;
 import com.sist.dao.*;
 import com.sist.vo.*;
@@ -61,8 +63,34 @@ public class FoodModel {
 		request.setAttribute("addr1", addr1.trim());
 		request.setAttribute("addr2", addr2.trim());
 		request.setAttribute("vo", vo);
+
+		
+		JjimVO jvo = new JjimVO();
+		jvo.setFno(Integer.parseInt(fno));
+		HttpSession session = request.getSession();
+		String id = (String)session.getAttribute("id");
+		
+		jvo.setId(id);
+		int jcount = FoodDAO.foodJjimCount(jvo);
+//		System.out.println(id);
+//		System.out.println(fno);
+//		System.out.println(jcount);
+		request.setAttribute("jcount", jcount);
 		request.setAttribute("main_jsp", "../food/food_detail.jsp");
 		return "../main/main.jsp";
+	}
+	
+	@RequestMapping("food/jjim.do")
+	public String food_jjim(HttpServletRequest request, HttpServletResponse response) {
+		String fno = request.getParameter("fno");
+		HttpSession session = request.getSession();
+		String id = (String)session.getAttribute("id");
+		JjimVO vo = new JjimVO();
+		vo.setFno(Integer.parseInt(fno));
+		vo.setId(id);
+		FoodDAO.foodJjimInsert(vo);
+		
+		return "redirect:../food/food_detail.do?fno="+fno;
 	}
 	
 	@RequestMapping("food/food_find.do")
@@ -99,5 +127,40 @@ public class FoodModel {
 		request.setAttribute("totalpage", totalpage);
 		request.setAttribute("main_jsp", "../food/food_find.jsp");
 		return "../main/main.jsp";
+	}
+	
+	// 마이페이지에서 찜 목록 출력
+	@RequestMapping("food/jjim_list.do")
+	public String food_jjim_list(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession session = request.getSession();
+		String id = (String)session.getAttribute("id");
+		List<Integer> list = FoodDAO.foodJjimGetFno(id);
+		List<FoodVO> fList = new ArrayList<FoodVO>();
+		for(int fno : list) {
+			FoodVO vo = FoodDAO.foodJjimListData(fno);
+			fList.add(vo);
+		}
+		
+		request.setAttribute("fList", fList);
+		request.setAttribute("mypage_jsp", "../mypage/jjim_list.jsp");
+		request.setAttribute("main_jsp", "../mypage/mypage.jsp");
+		return "../main/main.jsp";
+	}
+	
+	// 찜 취소
+	@RequestMapping("food/jjim_cancel.do")
+	public String food_jjim_cancel(HttpServletRequest request, HttpServletResponse response) {
+		String fno = request.getParameter("fno");
+		HttpSession session = request.getSession();
+		String id = (String)session.getAttribute("id");
+		
+		JjimVO vo = new JjimVO();
+		vo.setId(id);
+		vo.setFno(Integer.parseInt(fno));
+		
+		// DAO연동
+		FoodDAO.foodJjimDelete(vo);
+		
+		return "redirect:../food/jjim_list.do";
 	}
 }

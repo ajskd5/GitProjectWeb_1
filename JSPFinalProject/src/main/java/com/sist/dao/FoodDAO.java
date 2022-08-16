@@ -139,4 +139,91 @@ public class FoodDAO {
 		}
 		return total;
 	}
+	
+	
+	/*
+	 * ===================  찜하기  ======================================
+	<insert id="foodJjimInsert" parameterType="JjimVO">
+		<selectKey keyProperty="no" resultType="int" order="BEFORE">
+			SELECT NVL(MAX(no)+1, 1) as no FROM jjim
+		</selectKey>
+		INSERT INTO jjim VALUES(#{no}, #{id}, #{fno})
+	</insert>
+	<!-- 찜 여부 확인 -->
+	<select id="foodJjimCount" resultType="int" parameterType="JjimVO">
+		SELECT COUNT(*) FROM jjim
+		WHERE fno=#{fno} AND id=#{id}
+	</select>
+	 */
+	public static void foodJjimInsert(JjimVO vo) {
+		SqlSession session = null;
+		try {
+			session = ssf.openSession(true);
+			session.insert("foodJjimInsert", vo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+	}
+	public static int foodJjimCount(JjimVO vo) {
+		int count = 0;
+		SqlSession session = null;
+		try {
+			session = ssf.openSession();
+			count = session.selectOne("foodJjimCount", vo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return count;
+	}
+	
+	// 마이페이지 찜 목록
+	//<select id="foodJjimListData" resultType="FoodVO" parameterType="int">
+	public static FoodVO foodJjimListData(int fno) {
+		SqlSession session = null;
+		FoodVO vo = null;
+		try {
+			session = ssf.openSession();
+			vo = session.selectOne("foodJjimListData", fno);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return vo;
+	}
+	//<select id="foodJjimGetFno" resultType="int" parameterType="String">
+	public static List<Integer> foodJjimGetFno(String id){
+		List<Integer> list = null;
+		SqlSession session = null;
+		try {
+			session = ssf.openSession();
+			list = session.selectList("foodJjimGetFno", id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return list;
+	}
+	
+	// 찜 취소
+	//<delete id="foodJjimDelete" parameterType="JjimVO">
+	public static void foodJjimDelete(JjimVO vo) {
+		SqlSession session = null;
+		try {
+			session = ssf.openSession(true);
+			session.delete("foodJjimDelete", vo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+	}
+	
+	
+	
 }
