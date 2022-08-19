@@ -32,7 +32,108 @@ public class GoodsModel {
 	// 전체상품
 	@RequestMapping("goods_main/goods_all.do")
 	public String goods_all(HttpServletRequest request, HttpServletResponse response) {
+		String page = request.getParameter("page");
+		if(page == null) {
+			page = "1";
+		}
+		int curpage = Integer.parseInt(page);
+		// DAO 연결
+		Map map = new HashMap();
+		int rowSize = 9;
+		int start = (rowSize*curpage) - (rowSize-1);
+		int end = rowSize * curpage;
+		map.put("start", start);
+		map.put("end", end);
+		map.put("table_name", "goods_all");
+		
+		List<GoodsVO> list = GoodsDAO.goodsListData(map);
+		int totalpage = GoodsDAO.goodsTotalPage("goods_all");
+		
+		request.setAttribute("curpage", curpage);
+		request.setAttribute("totalpage", totalpage);
+		request.setAttribute("list", list);
 		request.setAttribute("goods_jsp", "../goods_main/goods_all.jsp");
+		return "../goods_main/goods_main.jsp";
+	}
+	
+	// 베스트
+	@RequestMapping("goods_main/goods_best.do")
+	public String goods_best(HttpServletRequest request, HttpServletResponse response) {
+		String page = request.getParameter("page");
+		if(page == null) {
+			page = "1";
+		}
+		int curpage = Integer.parseInt(page);
+		// DAO 연결
+		Map map = new HashMap();
+		int rowSize = 9;
+		int start = (rowSize*curpage) - (rowSize-1);
+		int end = rowSize * curpage;
+		map.put("start", start);
+		map.put("end", end);
+		map.put("table_name", "goods_best");
+		
+		List<GoodsVO> list = GoodsDAO.goodsListData(map);
+		int totalpage = GoodsDAO.goodsTotalPage("goods_best");
+		
+		request.setAttribute("curpage", curpage);
+		request.setAttribute("totalpage", totalpage);
+		request.setAttribute("list", list);
+		request.setAttribute("goods_jsp", "../goods_main/goods_best.jsp");
+		return "../goods_main/goods_main.jsp";
+	}
+	
+	// 특가상품
+	@RequestMapping("goods_main/goods_special.do")
+	public String goods_special(HttpServletRequest request, HttpServletResponse response) {
+		String page = request.getParameter("page");
+		if(page == null) {
+			page = "1";
+		}
+		int curpage = Integer.parseInt(page);
+		// DAO 연결
+		Map map = new HashMap();
+		int rowSize = 9;
+		int start = (rowSize*curpage) - (rowSize-1);
+		int end = rowSize * curpage;
+		map.put("start", start);
+		map.put("end", end);
+		map.put("table_name", "goods_special");
+		
+		List<GoodsVO> list = GoodsDAO.goodsListData(map);
+		int totalpage = GoodsDAO.goodsTotalPage("goods_special");
+		
+		request.setAttribute("curpage", curpage);
+		request.setAttribute("totalpage", totalpage);
+		request.setAttribute("list", list);
+		request.setAttribute("goods_jsp", "../goods_main/goods_special.jsp");
+		return "../goods_main/goods_main.jsp";
+	}
+	
+	// 신상품
+	@RequestMapping("goods_main/goods_new.do")
+	public String goods_new(HttpServletRequest request, HttpServletResponse response) {
+		String page = request.getParameter("page");
+		if(page == null) {
+			page = "1";
+		}
+		int curpage = Integer.parseInt(page);
+		// DAO 연결
+		Map map = new HashMap();
+		int rowSize = 9;
+		int start = (rowSize*curpage) - (rowSize-1);
+		int end = rowSize * curpage;
+		map.put("start", start);
+		map.put("end", end);
+		map.put("table_name", "goods_new");
+		
+		List<GoodsVO> list = GoodsDAO.goodsListData(map);
+		int totalpage = GoodsDAO.goodsTotalPage("goods_new");
+		
+		request.setAttribute("curpage", curpage);
+		request.setAttribute("totalpage", totalpage);
+		request.setAttribute("list", list);
+		request.setAttribute("goods_jsp", "../goods_main/goods_new.jsp");
 		return "../goods_main/goods_main.jsp";
 	}
 }

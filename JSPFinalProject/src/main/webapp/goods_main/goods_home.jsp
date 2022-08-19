@@ -17,54 +17,54 @@
 	
 	<div style="height: 20px;"></div>
 	<h1>베스트</h1>
-		<div class="items">
-		  <c:forEach var="vo" items="${bList }">
-		  <div class="item">
-			  <figure>
-				  <div class="img">
-					  <img src="${vo.poster }" style="width: 380px; height: 230px;">
-				  </div>
-				  <figcaption>${vo.name }</figcaption>
-				  <h3></h3>
-				  <p class="price">${vo.price }</p>
-			  </figure>
-		  </div>
-		  </c:forEach>
-		</div>
+	<div class="items">
+	  <c:forEach var="vo" items="${bList }">
+	  <div class="item">
+		  <figure>
+			  <div class="img">
+				  <img src="${vo.poster }" style="width: 380px; height: 230px;">
+			  </div>
+			  <figcaption>${vo.name }</figcaption>
+			  <h3></h3>
+			  <p class="price">${vo.price }</p>
+		  </figure>
+	  </div>
+	  </c:forEach>
+	</div>
 		
 	<div style="height: 20px;"></div>
 	<h1>신상품</h1>
-		<div class="items">
-		  <c:forEach var="vo" items="${nList }">
-		  <div class="item">
-			  <figure>
-				  <div class="img">
-					  <img src="${vo.poster }" style="width: 380px; height: 230px;">
-				  </div>
-				  <figcaption>${vo.name }</figcaption>
-				  <h3></h3>
-				  <p class="price">${vo.price }</p>
-			  </figure>
-		  </div>
-		  </c:forEach>
-		</div>
+	<div class="items">
+	  <c:forEach var="vo" items="${nList }">
+	  <div class="item">
+		  <figure>
+			  <div class="img">
+				  <img src="${vo.poster }" style="width: 380px; height: 230px;">
+			  </div>
+			  <figcaption>${vo.name }</figcaption>
+			  <h3></h3>
+			  <p class="price">${vo.price }</p>
+		  </figure>
+	  </div>
+	  </c:forEach>
+	</div>
 		
 	<div style="height: 20px;"></div>
 	<h1>특가상품</h1>
-		<div class="items">
-		  <c:forEach var="vo" items="${sList }">
-		  <div class="item">
-			  <figure>
-				  <div class="img">
-					  <img src="${vo.poster }" style="width: 380px; height: 230px;">
-				  </div>
-				  <figcaption>${vo.name }</figcaption>
-				  <h3></h3>
-				  <p class="price">${vo.price }</p>
-			  </figure>
-		  </div>
-		  </c:forEach>
-		</div>
+	<div class="items">
+	  <c:forEach var="vo" items="${sList }">
+	  <div class="item">
+		  <figure>
+			  <div class="img">
+				  <img src="${vo.poster }" style="width: 380px; height: 230px;">
+			  </div>
+			  <figcaption>${vo.name }</figcaption>
+			  <h3></h3>
+			  <p class="price">${vo.price }</p>
+		  </figure>
+	  </div>
+	  </c:forEach>
+	</div>
 		
 	</div>
 </body>

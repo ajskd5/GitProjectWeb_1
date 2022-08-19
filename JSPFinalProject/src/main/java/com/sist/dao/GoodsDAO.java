@@ -35,8 +35,40 @@ public class GoodsDAO {
 				session.close();
 			}
 		}
-		
 		return list;
 	}
 	
+	
+	// 상품 리스트 <select id="goodsListData" resultType="GoodsVO" parameterType="hashmap">
+	public static List<GoodsVO> goodsListData(Map map){
+		List<GoodsVO> list = null;
+		SqlSession session = null;
+		try {
+			session = ssf.openSession();
+			list = session.selectList("goodsListData", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(session != null) {
+				session.close();
+			}
+		}
+		return list;
+	}
+	// 총페이지 구하기 <select id="goodsTotalPage" resultType="int" parameterType="String">
+	public static int goodsTotalPage(String table_name){
+		int total = 0;
+		SqlSession session = null;
+		try {
+			session = ssf.openSession();
+			total = session.selectOne("goodsTotalPage", table_name);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(session != null) {
+				session.close();
+			}
+		}
+		return total;
+	}
 }
