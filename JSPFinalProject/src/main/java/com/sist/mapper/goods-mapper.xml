@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.mapper.goods-mapper">
+	<!-- VO에서 변수명을 컬럼명이랑 다르게하면 뒤에 as 로 이름 바꿈 -->
+	<select id="goodsMainData" resultType="GoodsVO" parameterType="String">
+		SELECT no, goods_poster as poster, goods_name as name, goods_price as price, rownum
+		FROM (SELECT no, goods_poster, goods_name, goods_price 
+		FROM ${table_name} ORDER BY no ASC)
+		WHERE rownum &lt;= 3
+	</select>
+</mapper>
