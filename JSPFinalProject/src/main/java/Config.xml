@@ -16,6 +16,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.sist.vo.ReplyVO" alias="ReplyVO"/>
 		<typeAlias type="com.sist.vo.BoardReplyVO" alias="BoardReplyVO"/>
 		<typeAlias type="com.sist.vo.JjimVO" alias="JjimVO"/>
+		<typeAlias type="com.sist.vo.ReserveVO" alias="ReserveVO"/>
+		<typeAlias type="com.sist.vo.GoodsVO" alias="GoodsVO"/>
 	
 	</typeAliases>
 	<environments default="development">
@@ -38,6 +40,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="com/sist/mapper/reply-mapper.xml"/>
 		<mapper resource="com/sist/mapper/board_reply-mapper.xml"/>
 		<mapper resource="com/sist/mapper/reserve-mapper.xml"/>
+		<mapper resource="com/sist/mapper/goods-mapper.xml"/>
 		
 	</mappers>
 </configuration>

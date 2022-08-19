@@ -224,6 +224,19 @@ public class FoodDAO {
 		}
 	}
 	
-	
+	// 맛집 => 관련 레시피 출력 <select id="foodRecipeMakeData" resultType="RecipeVO" parameterType="String">
+	public static List<RecipeVO> foodRecipeMakeData(String type){
+		List<RecipeVO> list = null;
+		SqlSession session = null;
+		try {
+			session = ssf.openSession();
+			session.delete("foodRecipeMakeData", type);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return list;
+	}
 	
 }

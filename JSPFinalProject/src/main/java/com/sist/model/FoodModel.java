@@ -72,11 +72,16 @@ public class FoodModel {
 		
 		jvo.setId(id);
 		int jcount = FoodDAO.foodJjimCount(jvo);
-//		System.out.println(id);
-//		System.out.println(fno);
-//		System.out.println(jcount);
 		request.setAttribute("jcount", jcount);
 		request.setAttribute("main_jsp", "../food/food_detail.jsp");
+		
+		// 관련 레시피 전송
+		// 브런치 / 버거 / 샌드위치 ==> 브런치|버거|샌드위치
+		String type=vo.getType();
+		type = type.replace("/", "|").replace(" ", "");
+		List<RecipeVO> rList = FoodDAO.foodRecipeMakeData(type);
+		request.setAttribute("rList", rList);
+		
 		return "../main/main.jsp";
 	}
 	

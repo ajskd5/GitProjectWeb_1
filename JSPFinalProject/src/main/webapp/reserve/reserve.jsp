@@ -26,7 +26,12 @@ $(function(){
 			$('#food').html(result);
 		}	
 	})
+	
 	$('#f_name_lab').hide();
+	$('#date_lab').hide();
+	$('#time_lab').hide();
+	$('#inwon_lab').hide();
+	$('#reserve_btn').hide();
 	
 	// 선택하면 맛집 리스트 변경
 	$('#type').change(function(){
@@ -109,9 +114,32 @@ $(function(){
 	                        <img src="default.png" style="width: 300px; height: 300px;" id="rImg">
 	                      </td>
 	                    </tr>
-	                    <tr>
-                          <td id="f_name_lab" width="30%">상호명</td>
+	                    <tr id="f_name_lab">
+                          <td width="30%">상호명</td>
                           <td id="f_name" width="70%"></td>
+                        </tr>
+                        <tr id="date_lab">
+                          <td width="30%">예약일</td>
+                          <td id="date_result" width="70%"></td>
+                        </tr>
+                        <tr id="time_lab">
+                          <td width="30%">예약시간</td>
+                          <td id="time_result" width="70%"></td>
+                        </tr>
+                        <tr id="inwon_lab">
+                          <td width="30%">예약인원</td>
+                          <td id="inwon_result" width="70%"></td>
+                        </tr>
+                        <tr id="reserve_btn">
+                          <td colspan="2" class="text-center">
+                            <form method="post" action="../reserve/reserve_ok.do">
+                              <input type="hidden" name="fno" id="re_fno"><%-- value는 각 jsp에서 넘겨줌 --%>
+                              <input type="hidden" name="rday" id="re_rday">
+                              <input type="hidden" name="rtime" id="re_rtime">
+                              <input type="hidden" name="inwon" id="re_inwon">
+                              <button class="btn btn-sm btn-primary">예약</button>
+                            </form>
+                          </td>
                         </tr>
 	                  </table>
 	                </td>
@@ -123,11 +151,17 @@ $(function(){
 	          <td class="warning" height="100">
 	            <table class="table">
 	              <caption><h3>시간 정보</h3></caption>
+	              <tr>
+	                <td id="r_time"></td>
+	              </tr>
 	            </table>
 	          </td>
 	          <td class="default" width="20%" height="100">
 	            <table class="table">
 	              <caption><h3>인원 정보</h3></caption>
+	              <tr>
+	                <td id="r_inwon"></td>
+	              </tr>
 	            </table>
 	          </td>
 	        </tr>

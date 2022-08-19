@@ -8,4 +8,75 @@
 		FROM (SELECT fno, poster, name FROM food_house WHERE type LIKE '%'||#{type}||'%' ORDER BY fno ASC)
 		WHERE rownum &lt;=50
 	</select>
+	
+	<!-- 예약 날짜 가져오기 -->
+	<select id="reserveGetDate" resultType="String" parameterType="int">
+		SELECT rday FROM food_house
+		WHERE fno=#{fno}
+	</select>
+	
+	<!-- 시간 가져오기 -->
+	<select id="reserveGetTime" resultType="String" parameterType="int">
+		SELECT time FROM reserve_day
+		WHERE rno=#{rno}
+	</select>
+	
+	<!-- db에 저장된 실제 시간 가져오기(09:00) -->
+	<select id="reserveRealTime" resultType="String" parameterType="int">
+		SELECT time FROM reserve_time
+		WHERE tno=#{tno}
+	</select>
+	
+	<!-- 예약등록 -->
+	<insert id="reserveInsert" parameterType="ReserveVO">
+		<selectKey keyProperty="no" resultType="int" order="BEFORE"><!-- 시퀀스 -->
+			SELECT NVL(MAX(no)+1, 1) as no FROM reserve
+		</selectKey>
+		INSERT INTO reserve(no, id, fno, rday, rtime, inwon)
+		VALUES(#{no}, #{id}, #{fno}, #{rday}, #{rtime}, #{inwon})
+	</insert>
+	<!-- mypage에서 출력 -->
+	<select id="reserveMypageData" resultType="ReserveVO" parameterType="String">
+		SELECT no, rday, rtime, inwon, ischeck, regdate,
+			(SELECT name FROM food_house WHERE food_house.fno=reserve.fno) as name,
+			(SELECT poster FROM food_house WHERE food_house.fno=reserve.fno) as poster,
+			(SELECT address FROM food_house WHERE food_house.fno=reserve.fno) as address,
+			(SELECT tel FROM food_house WHERE food_house.fno=reserve.fno) as tel,
+			(SELECT type FROM food_house WHERE food_house.fno=reserve.fno) as type
+		FROM reserve
+		WHERE id=#{id}
+		ORDER BY no DESC
+	</select>
+	<select id="reserveAdminpageData" resultType="ReserveVO"><!-- 관리자 페이지 (id값도 같이 가져옴) -->
+		SELECT no, rday, rtime, inwon, ischeck, regdate, id,
+			(SELECT name FROM food_house WHERE food_house.fno=reserve.fno) as name,
+			(SELECT poster FROM food_house WHERE food_house.fno=reserve.fno) as poster,
+			(SELECT address FROM food_house WHERE food_house.fno=reserve.fno) as address,
+			(SELECT tel FROM food_house WHERE food_house.fno=reserve.fno) as tel,
+			(SELECT type FROM food_house WHERE food_house.fno=reserve.fno) as type
+		FROM reserve
+		ORDER BY no DESC
+	</select>
+	<!-- 예약 완료 -->
+	<update id="reserveAdminUpdate" parameterType="int">
+		UPDATE reserve SET
+		ischeck = 'y'
+		WHERE no=#{no}
+	</update>
+	<!-- 예약 취소 -->
+	<delete id="reserveCancel" parameterType="int">
+		DELETE FROM reserve
+		WHERE no=#{no}
+	</delete>
+	
+	<select id="reserveInfoData" resultType="ReserveVO" parameterType="int">
+		SELECT no, rday, rtime, inwon, ischeck, TO_CHAR(regdate, 'YYYY"년 "MM"월 "DD"일 "HH24:MI:SS') as dbday,
+			(SELECT name FROM food_house WHERE food_house.fno=reserve.fno) as name,
+			(SELECT poster FROM food_house WHERE food_house.fno=reserve.fno) as poster,
+			(SELECT address FROM food_house WHERE food_house.fno=reserve.fno) as address,
+			(SELECT tel FROM food_house WHERE food_house.fno=reserve.fno) as tel,
+			(SELECT type FROM food_house WHERE food_house.fno=reserve.fno) as type
+		FROM reserve
+		WHERE no=#{no}
+	</select>
 </mapper>

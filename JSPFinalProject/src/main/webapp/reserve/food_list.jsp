@@ -24,7 +24,7 @@ $(function(){
 		$('#f_name_lab').show();
 		$('#f_name').text(name);
 		$('#rImg').attr("src", poster);
-		
+		$('#re_fno').val(fno); // reserve.jsp에서 value를 주지 않고 여기서 fno를 넣음
 		// 달력
 		$.ajax({
 			type:'post',
