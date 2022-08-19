@@ -71,4 +71,21 @@ public class GoodsDAO {
 		}
 		return total;
 	}
+	
+	// 상세보기 <select id="goodsDetailData" resultType="GoodsVO" parameterType="hashmap">
+	public static GoodsVO goodsDetailData(Map map) {
+		GoodsVO vo = new GoodsVO();
+		SqlSession session = null;
+		try {
+			session = ssf.openSession();
+			vo = session.selectOne("goodsDetailData", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(session != null) {
+				session.close();
+			}
+		}
+		return vo;
+	}
 }

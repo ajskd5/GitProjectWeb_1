@@ -14,13 +14,10 @@ public class GoodsModel {
 	public String goods_main(HttpServletRequest request, HttpServletResponse response) {
 		// 베스트 best
 		List<GoodsVO> bList = GoodsDAO.goodsMainData("goods_best");
-		
 		// 특가 special
 		List<GoodsVO> sList = GoodsDAO.goodsMainData("goods_special");
-		
 		// 신상품 new
 		List<GoodsVO> nList = GoodsDAO.goodsMainData("goods_new");
-		
 		// goods_home.jsp로 request를 전송 => EL/JSTL로 jsp에서 출력
 		request.setAttribute("bList", bList);
 		request.setAttribute("sList", sList);
@@ -136,4 +133,34 @@ public class GoodsModel {
 		request.setAttribute("goods_jsp", "../goods_main/goods_new.jsp");
 		return "../goods_main/goods_main.jsp";
 	}
+	
+	// 상세보기
+	@RequestMapping("goods_main/goods_detail.do")
+	public String goods_detail(HttpServletRequest request, HttpServletResponse response) {
+		String strNo = request.getParameter("no");
+		String strCno = request.getParameter("cno");
+		int no = Integer.parseInt(strNo);
+		int cno = Integer.parseInt(strNo);
+		String table_name = "";
+		if(cno == 1) {
+			table_name = "goods_all";
+		} else if(cno == 2) {
+			table_name = "goods_best";
+		} else if(cno == 3) {
+			table_name = "goods_special";
+		} else if(cno == 4) {
+			table_name = "goods_new";
+		}
+		
+		Map map = new HashMap();
+		map.put("table_name", table_name);
+		map.put("no", no);
+		GoodsVO vo = GoodsDAO.goodsDetailData(map);
+		
+		request.setAttribute("vo", vo);
+		request.setAttribute("goods_jsp", "../goods_main/goods_detail.jsp");
+		return "../goods_main/goods_main.jsp";
+	}
+	
+	
 }

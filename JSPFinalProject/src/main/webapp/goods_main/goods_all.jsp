@@ -21,7 +21,7 @@
 	  <div class="item">
 		  <figure>
 			  <div class="img">
-				  <img src="${vo.poster }">
+				  <a href="../goods_main/goods_detail.do?no=${vo.no }&cno=1"><img src="${vo.poster }"></a>
 			  </div>
 			  <figcaption>${vo.name }</figcaption>
 			  <h3></h3>

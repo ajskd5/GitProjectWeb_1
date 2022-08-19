@@ -21,4 +21,11 @@
 	<select id="goodsTotalPage" resultType="int" parameterType="String">
 		SELECT CEIL(COUNT(*)/9.0) FROM ${table_name}
 	</select>
+	
+	<!-- 상세보기 -->
+	<select id="goodsDetailData" resultType="GoodsVO" parameterType="hashmap">
+		SELECT no, goods_poster as poster, goods_sub as sub, goods_name as name, goods_price as price, goods_first_price as first_price, goods_discount as discount
+		FROM ${table_name}
+		WHERE no=#{no}
+	</select>
 </mapper>
